@@ -60,7 +60,7 @@
         content="游客模式下不可以评论和留言哦"
         placement="top"
       >
-        <el-button>游客访问</el-button>
+        <el-button @click="test">游客访问</el-button>
       </el-tooltip>
     </el-form>
   </div>
@@ -68,7 +68,8 @@
 
 <script>
 // import background from '../components/background.vue'
-import login from '../apis/User'
+// import loginToBack from '../apis/user.js'
+// import * as setToken from '@/request/token.js' 
 export default {
   name: "Login",
   data() {
@@ -100,18 +101,50 @@ export default {
   },
   methods: {
     login(formName) {
+      let that = this
+      let userData = this.user
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert("submit!");
-          login(this.user.account, this.user.password)
-          this.$router.push({
-            path: '/',
-          });
+          that.$store.dispatch('login', userData).then(() => {
+              that.$router.push({
+                path: "/",
+              });    
+            }).catch((error) => {
+              alert(error)
+              if (error !== 'error') {
+                that.$message({message: "出错了", type: 'error', showClose: true});
+              }
+            })
         } else {
           console.log("error submit!!");
           return false;
         }
       });
+    },
+
+    test(){
+      // loginToBack("20223020", "12345678").then(response=>{
+      //   console.log(response)
+      // })
+      let that = this
+      let userData = {
+        account: '20223020',
+        password: '12345678',
+      }
+      // setToken({name: "zhangsan", age: 18})
+      // localStorage.zhangsan = JSON.stringify({name: "zhangsan", age: 18})
+      // alert("存储成功")
+      this.$store.dispatch('login', userData).then(() => {
+              that.$router.push({
+                path: "/",
+              });    
+            }).catch((error) => {
+              alert(error)
+              if (error !== 'error') {
+                that.$message({message: "出错了", type: 'error', showClose: true});
+              }
+            })
     },
 
     reginster() {

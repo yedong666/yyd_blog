@@ -7,7 +7,6 @@ import lombok.Data;
 @Data
 @TableName("user")
 public class User {
-    @TableField("id")
     private Long id;
     @TableField("account")
     private String account;

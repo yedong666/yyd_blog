@@ -1,8 +1,8 @@
 <template>
   <div class="nav">
     <div class="user">
-       <el-button style="margin: 10px" @click="login">
-        登录/注册
+       <el-button style="margin: 10px" @click="jumpToLogin">
+        {{userMessage}}
         </el-button>
     </div>
     <div class="menuContainer">
@@ -39,20 +39,30 @@
 </template>
 
 <script>
+import {getUserData} from '@/request/token.js'
 export default {
   name: 'Navbar',
   data() {
     return {
       searchInput: '',
       activeIndex2: '1',
-    }
+      userMessage: "登录/注册",
+    } 
   },
+
+  mounted(){
+    if (getUserData() != null){
+          console.log(JSON.parse(getUserData()))
+          this.userMessage =  JSON.parse(getUserData()).nickname
+        }
+  },
+
   methods: {
     handleSelect(key, keyPath) {
       console.log(key, keyPath)
     },
 
-    login(){
+    jumpToLogin(){
       this.$router.push({path: '/login'})
     }
 
@@ -94,6 +104,7 @@ export default {
 .el-button{
   background: #80b7de;
   color: aqua;
+  font-size: 20px;
 }
 
 .el-button:hover{

@@ -26,8 +26,14 @@ import FootBar from '@/components/FootBar.vue'
 
 export default {
   data() {
-    return {}
+    return {
+      user:{}
+    }
   },
+
+  // created(){
+  //   this.user = this.$route.query.user
+  // },
 
   components: {
     Background,

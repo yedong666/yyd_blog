@@ -17,12 +17,13 @@ public class UserService {
         return userMapper.selectList(null);
     }
 
-    public boolean login(String account, String password){
+    public User login(String account, String password){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-        //根据查询的结果集中id排序
-        queryWrapper.orderByAsc("account");
+        queryWrapper.eq("account", account);
         User user = userMapper.selectOne(queryWrapper);
-        //该账号存在且密码正确
-        return (user!= null && user.getPassword() == password);
+        if (!user.getPassword().equals(password)){
+            return null;
+        }
+        return user;
     }
 }

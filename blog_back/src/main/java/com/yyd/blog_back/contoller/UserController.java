@@ -16,4 +16,9 @@ public class UserController {
     private String checkUsers(){
         return userService.getAllUsersData().toString();
     }
+
+    @RequestMapping("login")
+    private String login(){
+        return userService.getAllUsersData().toString();
+    }
 }

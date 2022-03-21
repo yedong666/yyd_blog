@@ -68,6 +68,7 @@
 
 <script>
 // import background from '../components/background.vue'
+import login from '../apis/User'
 export default {
   name: "Login",
   data() {
@@ -102,6 +103,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           alert("submit!");
+          login(this.user.account, this.user.password)
           this.$router.push({
             path: '/',
           });

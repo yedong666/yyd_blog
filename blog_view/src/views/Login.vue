@@ -30,13 +30,9 @@
           type="text"
           placeholder="验证码"
           v-model="user.code"
-          style="width: 250px; float: left; margin-right: 10px"
+          style="width: 190px; float: left; margin-right: 10px; margin-bottom: 20px"
         ></el-input>
-        <el-image
-          :src="codeImgUrl"
-          @click="changeCodeImg"
-          style="width: 90px; height: 40px;  float: left"
-        ></el-image>
+        <valid-code :value.sync="validCode"></valid-code>
       </el-form-item>
       <el-tooltip
         class="item"
@@ -70,8 +66,12 @@
 // import background from '../components/background.vue'
 // import loginToBack from '../apis/user.js'
 // import * as setToken from '@/request/token.js' 
+import ValidCode from '@/components/ValidCode.vue'
 export default {
   name: "Login",
+  components:{
+    ValidCode,
+  },
   data() {
     return {
       user: {

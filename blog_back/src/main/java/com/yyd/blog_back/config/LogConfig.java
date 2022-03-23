@@ -27,7 +27,7 @@ public class LogConfig {
         RequestAttributes requestAttributes;//这个RequestContextHolder是Springmvc提供来获得请求的东西
         requestAttributes = RequestContextHolder.getRequestAttributes();
         HttpServletRequest request = ((ServletRequestAttributes)requestAttributes).getRequest();
-
+        System.out.println("--------------------");
         // 记录下请求内容
         logger.info("URL : " + request.getRequestURL().toString());
         logger.info("HTTP_METHOD : " + request.getMethod());

@@ -17,6 +17,11 @@
       <el-form-item prop="email">
         <el-input type="text" auto-complete="false" placeholder="邮箱" v-model="user.email"></el-input>
       </el-form-item>
+       <el-form-item prop="code">
+        <el-input type="text" auto-complete="false" placeholder="验证码" v-model="user.code" style="width: 188px; float: left; margin-right: 10px;"></el-input>
+        <valid-code @listen="getCode"></valid-code>
+      </el-form-item>
+       <el-button  @click="test()">test</el-button>
      <el-tooltip class="item" effect="dark" content="注册成功后账号将发送至您的邮箱" placement="top" >
         <el-button  @click="doReginster('form')">注册</el-button>
       </el-tooltip>
@@ -26,8 +31,14 @@
 
 <script>
 // import background from '../components/background.vue'
+import ValidCode from '@/components/ValidCode.vue'
+import {registerToBack} from '@/apis/user.js'
+
 export default {
-  name: 'Reginster',
+  name: 'Register',
+  components:{
+    ValidCode,
+  },
   data() {
     return {
       user: {
@@ -36,7 +47,9 @@ export default {
         passwords: '',
         phoneNumber: '',
         email: '',
+        code: '',
       },
+      code: '',
       rules:{
            name: [
             { required: true, message: '请输入昵称', trigger: 'blur' },
@@ -55,24 +68,66 @@ export default {
             { min: 11, max: 11, message: '请输入正确的电话号码', trigger: 'blur' }
           ],
           email: [
-            { required: true, message: '请输入昵称', trigger: 'blur' },
+            { required: true, message: '请输入邮箱账号', trigger: 'blur' },
             { min: 6, max: 12, message: '请输入正确的邮箱', trigger: 'blur' }
+          ],
+          code: [
+            { required: true, message: '请输入验证码', trigger: 'blur' },
+            { min: 4, max: 4, message: '请输入正确的验证码', trigger: 'blur' }
           ],
       },
     }
   },
   methods: {
     doReginster(formName) {
+      let that = this
         this.$refs[formName].validate((valid) => {
-          if (valid) {
-            alert('submit!');
+          if (valid && that.checkReginsterData(that.user.phoneNumber, that.user.email, that.user.code)) {
+            registerToBack({
+              password: that.user.password,
+              nickname: that.user.name,
+              phoneNumber: that.user.phoneNumber,
+              email: that.user.email,
+            })
+            that.$message({message: "账号注册成功", type: "success", showClose: true})
           } else {
             console.log('error submit!!');
             return false;
           }
         })
       },
-    changeCodeImg() {},
+
+      test(){
+        registerToBack({
+              account: '20223025',
+              password: '1234',
+              nickname: 'tyojd',
+              phoneNumber: 'dadwda',
+              email: 'dadda',
+            })
+      },
+
+    checkReginsterData(phonenumber, email, code){
+      if (!(/^\d+$/).test(phonenumber)){ 
+        //电话号码中存在数字以外的字符
+          this.$message({message: '电话号码格式错误', type: 'error', showClose: true})
+          return false
+      }
+      if (!(new RegExp('.*@.*\\.com').test(email))){
+        this.$message({message: '邮箱格式错误', type: 'error', showClose: true})
+        return false
+      }
+      if (code != this.code || code == ''){
+        this.$message({message: '验证码错误', type: 'error', showClose: true})
+        return false
+      }
+      return true
+    },
+
+    getCode(code){
+      this.code = code
+    }
+
   },
 }
 </script>
@@ -84,21 +139,23 @@ export default {
     height: 100%;
     top: 0;
     margin: 0 auto;
-    background-image: url( '../assets/gif-bg1.gif');
+    background-image: url( '../assets/reginster_bg.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
-el-input{
-    background: linear-gradient(to right, #facabb , );;
+.el-input{
+    border: 1px solid rgb(182, 170, 170);
 }
 
 el-button{
-    background: linear-gradient(to right, #facabb , );;
+    background: linear-gradient(to right, #facabb , );
 }
 
 .loginForm {
   border-radius: 15px;
   background-clip: padding-box;
-  margin: 288px auto;
+  margin: 200px auto;
   box-shadow: 0 0 10px gray;
   width: 350px;
   padding: 15px 35px 15px 35px;

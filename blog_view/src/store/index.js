@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import {setUserData, getUserData} from '@/request/token'
-import loginToBack from '@/apis/user.js'
+import {loginToBack} from '@/apis/user.js'
 
 Vue.use(Vuex);
 

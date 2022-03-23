@@ -30,7 +30,7 @@
           type="text"
           placeholder="验证码"
           v-model="user.code"
-          style="width: 190px; float: left; margin-right: 10px; margin-bottom: 20px"
+          style="width: 188px; float: left; margin-right: 10px;"
         ></el-input>
         <valid-code :value.sync="validCode"></valid-code>
       </el-form-item>
@@ -124,6 +124,8 @@ export default {
     },
 
     test(){
+      let patt = new RegExp(".*@.*\\.com")
+      alert(patt.test("13qq.com"))
       // loginToBack("20223020", "12345678").then(response=>{
       //   console.log(response)
       // })

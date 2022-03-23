@@ -28,10 +28,12 @@ export default {
   },
   mounted () {
     this.createdCode()
+    this.getCode()
   },
   methods: {
     refreshCode () {
       this.createdCode()
+      this.getCode()
     },
     createdCode () {
       let len = this.length,
@@ -57,7 +59,19 @@ export default {
     },
     getStyle (data) {
       return `color: ${data.color}; font-size: ${data.fontSize}; padding: ${data.padding}; transform: ${data.transform}`
+    },
+
+    getCode(){
+      let code = ''
+      for(let item of this.codeList){
+        code += item.code
+      }
+      if (code.length != 4){
+        this.$message({message: '验证码出错了('+code+')', type: 'error', showClose: true})
+      }
+      this.$emit('listen', code)
     }
+
   }
 }
 </script>
@@ -69,6 +83,7 @@ export default {
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: hidden;
     cursor: pointer;
     span{
       display: inline-block;

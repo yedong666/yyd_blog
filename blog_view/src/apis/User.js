@@ -1,6 +1,6 @@
 import request from '@/request'
 
-export default function loginToBack(account, password) {
+export function loginToBack(account, password) {
     alert(account, password)
     const data = {
       account,
@@ -12,3 +12,15 @@ export default function loginToBack(account, password) {
       params: data,
     })
 }
+
+export function registerToBack(user){
+  alert("开始注册")
+  return request({
+    url: '/register',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(user),
+  })
+}  

@@ -1,28 +1,12 @@
 <template>
   <div class="formContainer">
-    <el-form
-      label-position="left"
-      ref="form"
-      :model="user"
-      class="loginForm"
-      :rules="rules"
-    >
+    <el-form label-position="left" ref="form" :model="user" class="loginForm" :rules="rules">
       <h2 style="margin-bottom: 10px; color: rgb(0, 195, 255">欢迎访问叶栋的个人博客</h2>
       <el-form-item prop="account">
-        <el-input
-          type="text"
-          auto-complete="false"
-          placeholder="账号"
-          v-model="user.account"
-        ></el-input>
+        <el-input type="text" auto-complete="false" placeholder="账号" v-model="user.account"></el-input>
       </el-form-item>
       <el-form-item prop="password">
-        <el-input
-          type="password"
-          auto-complete="false"
-          placeholder="密码"
-          v-model="user.password"
-        ></el-input>
+        <el-input type="password" auto-complete="false" placeholder="密码" v-model="user.password"></el-input>
       </el-form-item>
       <el-form-item prop="code">
         <el-input
@@ -30,32 +14,17 @@
           type="text"
           placeholder="验证码"
           v-model="user.code"
-          style="width: 188px; float: left; margin-right: 10px;"
+          style="width: 188px; float: left; margin-right: 10px"
         ></el-input>
         <valid-code :value.sync="validCode"></valid-code>
       </el-form-item>
-      <el-tooltip
-        class="item"
-        effect="dark"
-        content="登录后才能获得完整权限"
-        placement="top"
-      >
+      <el-tooltip class="item" effect="dark" content="登录后才能获得完整权限" placement="top">
         <el-button @click="login('form')">登录</el-button>
       </el-tooltip>
-      <el-tooltip
-        class="item"
-        effect="dark"
-        content="点击注册账号"
-        placement="top"
-      >
+      <el-tooltip class="item" effect="dark" content="点击注册账号" placement="top">
         <el-button @click="reginster">注册</el-button>
       </el-tooltip>
-      <el-tooltip
-        class="item"
-        effect="dark"
-        content="游客模式下不可以评论和留言哦"
-        placement="top"
-      >
+      <el-tooltip class="item" effect="dark" content="游客模式下不可以评论和留言哦" placement="top">
         <el-button @click="test">游客访问</el-button>
       </el-tooltip>
     </el-form>
@@ -63,41 +32,38 @@
 </template>
 
 <script>
-// import background from '../components/background.vue'
-// import loginToBack from '../apis/user.js'
-// import * as setToken from '@/request/token.js' 
+
 import ValidCode from '@/components/ValidCode.vue'
 export default {
-  name: "Login",
-  components:{
+  name: 'Login',
+  components: {
     ValidCode,
   },
   data() {
     return {
       user: {
-        account: "",
-        password: "",
-        code: "",
+        account: '',
+        password: '',
+        code: '',
       },
       rules: {
         account: [
-          { required: true, message: "请输入账号", trigger: "blur" },
+          { required: true, message: '请输入账号', trigger: 'blur' },
           {
             min: 6,
             max: 12,
-            message: "长度在 6 到 12 个字符",
-            trigger: "blur",
+            message: '长度在 6 到 12 个字符',
+            trigger: 'blur',
           },
         ],
         password: [
-          { required: true, message: "请输入密码", trigger: "change" },
-          { min: 4, max: 8, message: "长度在 4 到 8 个字符", trigger: "blur" },
+          { required: true, message: '请输入密码', trigger: 'change' },
+          { min: 4, max: 8, message: '长度在 4 到 8 个字符', trigger: 'blur' },
         ],
-        code: [{ required: true, message: "请输入验证码", trigger: "change" }],
+        code: [{ required: true, message: '请输入验证码', trigger: 'change' }],
       },
-      codeImgUrl:
-        "https://img0.baidu.com/it/u=3060508493,2267137751&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=213",
-    };
+      codeImgUrl: 'https://img0.baidu.com/it/u=3060508493,2267137751&fm=253&fmt=auto&app=138&f=JPEG?w=400&h=213',
+    }
   },
   methods: {
     login(formName) {
@@ -105,59 +71,40 @@ export default {
       let userData = this.user
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert("submit!");
-          that.$store.dispatch('login', userData).then(() => {
+          alert('submit!')
+
+          that.$store
+            .dispatch('login', userData)
+            .then(() => {
               that.$router.push({
-                path: "/",
-              });    
-            }).catch((error) => {
+                path: '/',
+              })
+            })
+            .catch((error) => {
               alert(error)
               if (error !== 'error') {
-                that.$message({message: "出错了", type: 'error', showClose: true});
+                that.$message({ message: '出错了', type: 'error', showClose: true })
               }
             })
         } else {
-          console.log("error submit!!");
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
 
-    test(){
-      let patt = new RegExp(".*@.*\\.com")
-      alert(patt.test("13qq.com"))
-      // loginToBack("20223020", "12345678").then(response=>{
-      //   console.log(response)
-      // })
-      let that = this
-      let userData = {
-        account: '20223020',
-        password: '12345678',
-      }
-      // setToken({name: "zhangsan", age: 18})
-      // localStorage.zhangsan = JSON.stringify({name: "zhangsan", age: 18})
-      // alert("存储成功")
-      this.$store.dispatch('login', userData).then(() => {
-              that.$router.push({
-                path: "/",
-              });    
-            }).catch((error) => {
-              alert(error)
-              if (error !== 'error') {
-                that.$message({message: "出错了", type: 'error', showClose: true});
-              }
-            })
+    test() {
     },
 
     reginster() {
       this.$router.push({
-        path: "/reginster",
-      });
+        path: '/reginster',
+      })
     },
 
     changeCodeImg() {},
   },
-};
+}
 </script>
 
 <style>
@@ -167,7 +114,7 @@ export default {
   height: 100%;
   top: 0;
   margin: 0 auto;
-  background-image: url("../assets/gif-bg1.gif");
+  background-image: url('../assets/gif-bg1.gif');
 }
 
 el-input {

@@ -1,17 +1,14 @@
 package com.yyd.blog_back.contoller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.yyd.blog_back.common.Result;
 import com.yyd.blog_back.common.util.PrintfMessage;
 import com.yyd.blog_back.entity.People;
 import com.yyd.blog_back.entity.User;
 import com.yyd.blog_back.service.UserService;
-import com.yyd.blog_back.vo.UserVo;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.security.Principal;
 
 @RestController
 public class UserController {
@@ -35,12 +32,15 @@ public class UserController {
         return Result.success(user);
     }
 
-    /**
-     * @Param("nickname") String nickname, @Param("password") String password,
-     *                              @Param("phoneNumber") String phoneNumber, @Param("email") String email
-     * @param
-     * @return
-     */
+    @RequestMapping(value = "logout", method = RequestMethod.POST, produces = "application/json")
+    private Result logout(@RequestBody User userData){
+        PrintfMessage.logRequest("logout");
+        if (userData.getStatus() == 0){
+            return Result.success("允许退出");
+        }
+        return Result.error();
+    }
+
     @RequestMapping(value = "register", method = RequestMethod.POST, produces = "application/json")
     private Result reginster(@RequestBody User userData){
         System.out.println(userData.toString());

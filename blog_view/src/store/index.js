@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {setUserData, getUserData} from '@/request/token'
-import {loginToBack} from '@/apis/user.js'
+import {setUserData, getUserData, removeToken} from '@/request/token'
+import {loginToBack, logoutFromBack} from '@/apis/user.js'
 
 Vue.use(Vuex);
 
@@ -35,6 +35,8 @@ export default new Vuex.Store({
     }
   },
   actions: {
+
+    //登录
     login({commit}, user) {
       return new Promise((resolve, reject) => {
         loginToBack(user.account, user.password).then(response => {
@@ -43,6 +45,24 @@ export default new Vuex.Store({
           setUserData(response.data.data)
           resolve()
         }).catch(error => { 
+          reject(error)
+        })
+      })
+    },
+
+    //退出
+    logout({commit}, state) {
+      console.log(state)
+      return new Promise((resolve, reject) => {
+        logoutFromBack(state).then(data => {
+          console.log(data)
+          commit('SET_TOKEN', '')
+          commit('SET_ACCOUNT', '')
+          commit('SET_NAME', '')
+          commit('SET_ID', '')
+          removeToken()
+          resolve()
+        }).catch(error => {
           reject(error)
         })
       })

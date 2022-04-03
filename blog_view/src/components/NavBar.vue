@@ -1,9 +1,10 @@
 <template>
   <div class="nav">
     <div class="user">
-       <el-button style="margin: 10px" @click="jumpToLogin">
-        {{userMessage}}
-        </el-button>
+      <el-button style="margin: 10px" @click="jumpToLogin">
+        {{ userMessage }}
+      </el-button>
+      <el-button :style="logoutButtonStyle" @click="jumpToLogout"> 退出 </el-button>
     </div>
     <div class="menuContainer">
       <el-menu
@@ -32,29 +33,33 @@
         <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">后台管理</a></el-menu-item>
       </el-menu>
     </div>
-     <el-input placeholder="请输入内容" v-model="searchInput" class="input-with-select">
-    <el-button slot="append" icon="el-icon-search" ></el-button>
-  </el-input>
+    <el-input placeholder="请输入内容" v-model="searchInput" class="input-with-select">
+      <el-button slot="append" icon="el-icon-search"></el-button>
+    </el-input>
   </div>
 </template>
 
 <script>
-import {getUserData} from '@/request/token.js'
+import { getUserData } from '@/request/token.js'
 export default {
   name: 'Navbar',
   data() {
     return {
       searchInput: '',
       activeIndex2: '1',
-      userMessage: "登录/注册",
-    } 
+      userMessage: '登录/注册',
+      logoutButtonStyle: 'margin: 10px; display: none',
+      user: {},
+    }
   },
 
-  mounted(){
-    if (getUserData() != null){
-          console.log(JSON.parse(getUserData()))
-          this.userMessage =  JSON.parse(getUserData()).nickname
-        }
+  mounted() {
+    if (getUserData() != null) {
+      console.log(JSON.parse(getUserData()))
+      this.user = JSON.parse(getUserData())
+      this.userMessage = this.user.nickname
+      this.changeLogoutStyle()
+    }
   },
 
   methods: {
@@ -62,10 +67,31 @@ export default {
       console.log(key, keyPath)
     },
 
-    jumpToLogin(){
-      this.$router.push({path: '/login'})
-    }
+    jumpToLogout() {
+      let that = this
+      console.log(this.user)
+      this.$store
+        .dispatch('logout', this.user)
+        .then(() => {
+          alert('退出成功')
+          that.$router.go(0)
+        })
+        .catch((error) => {
+          alert(error)
+        })
+    },
 
+    jumpToLogin() {
+      this.$router.push({ path: '/login' })
+    },
+
+    changeLogoutStyle() {
+      if (this.logoutButtonStyle == 'margin: 10px; display: none') {
+        this.logoutButtonStyle = 'margin: 10px; display: block'
+      } else {
+        this.logoutButtonStyle = 'margin: 10px; display: none'
+      }
+    },
   },
 }
 </script>
@@ -82,7 +108,7 @@ export default {
   font-size: 25px;
 }
 
-.user{
+.user {
   position: absolute;
   left: 10px;
 }
@@ -101,14 +127,13 @@ export default {
   font-size: 20px;
 }
 
-.el-button{
+.el-button {
   background: #80b7de;
   color: aqua;
   font-size: 20px;
 }
 
-.el-button:hover{
+.el-button:hover {
   background: #409eff;
 }
-  
 </style>

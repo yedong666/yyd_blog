@@ -24,3 +24,15 @@ export function registerToBack(user){
     data: JSON.stringify(user),
   })
 }  
+
+export function logoutFromBack(state){
+  console.log(state)
+  return request({
+    url: '/logout',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(state),
+  })
+}

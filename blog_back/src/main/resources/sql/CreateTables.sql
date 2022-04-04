@@ -20,6 +20,7 @@ CREATE TABLE `yyd_blog`.`article` (
                                       `content` VARCHAR(1000) NULL,
                                       `summarize` text NULL,
                                       `author` VARCHAR(20) NULL,
+                                      `coverImage` varchar(100) NULL,
                                       `tags`  varchar (50) NULL,
                                       `numberOfComment` INT NULL,
                                       `numberOfLike` INT NULL,
@@ -33,7 +34,9 @@ DEFAULT CHARACTER SET = utf8;
 drop table  if exists yyd_blog.tags;
 CREATE TABLE `yyd_blog`.`tags` (
                                    `id` INT NOT NULL AUTO_INCREMENT,
-                                   `content`  text NULL,
+                                   `name` varchar(20) NULL,
+                                   `imgUrl` varchar(50) NULL,
+                                   `description` varchar(500) NULL,
                                    PRIMARY KEY (`id`))
     ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
@@ -44,7 +47,8 @@ drop table  if exists yyd_blog.comments;
 CREATE TABLE `yyd_blog`.`comments` (
                                        `id` INT NOT NULL AUTO_INCREMENT,
                                        `content`  text NULL,
-                                       `observer` varchar(20) NULL,
+                                       `observerId` INT NULL,
+                                        `articleId` INT NULL,
                                        `date` varchar(50) NULL,
                                        `numberOfLike` int NULL,
                                        PRIMARY KEY (`id`))

@@ -26,6 +26,10 @@ public class Result extends HashMap<String, Object> implements Serializable {
         return new Result(Code.NOT_FOUND_RESOURSE, Message.ERROR, null);
     }
 
+    public static Result error(String errorMessage) {
+        return new Result(Code.NOT_FOUND_RESOURSE, Message.ERROR, errorMessage);
+    }
+
     /**
      * 封装业务数据
      *

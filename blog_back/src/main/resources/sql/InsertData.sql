@@ -5,7 +5,7 @@ values
     (3, '20223020', '12345678', 'Jack','15627899083','jack@qq.com', 0);
 
 
-insert into yyd_blog.article(id, title, content, summarize, author, numberOfComment, numberOfLike, numberOfView)
+insert into yyd_blog.article(id, title, content, summarize, author, coverImage, numberOfComment, numberOfLike, numberOfView)
 values
     (1,
      '我一学计算机的，请问为什么计算机专业要学《大学物理》，真的不知道学来干什么？',
@@ -39,18 +39,18 @@ values
     );
 
 --创建tags表
-insert into yyd_blog.tags(id, content)
+insert into yyd_blog.tags(id, name, imgUrl, description)
 values
-    (1, '生活分享'),
-    (2, '技术交流'),
-    (3, '项目分析'),
-    (4, '知识总结');
+    (1, '生活分享', 'imgUrl1', '分享日常生活'),
+    (2, '技术交流', 'imgUrl2', '一起交流最新最热技术'),
+    (3, '项目分析', 'imgUrl3', '一起探讨项目经验'),
+    (4, '知识总结', 'imhUrl4', '一起总结知识体系');
 
 --创建comments表
-insert into yyd_blog.comments(id, content, observer, date, numberOfLike)
+insert into yyd_blog.comments(id, content, observerId, articleId, date, numberOfLike)
 values
-    (1, '讲得真好', 'admin', '2022-4-22 17:59', 78),
-    (2, '讲得真棒', 'admin', '2022-4-22 18:59', 24),
-    (3, '讲得真详细', 'admin', '2022-4-22 20:59', 45),
-    (4, '讲得真仔细', 'admin', '2022-4-22 22:59', 26),
-    (5, '讲得好厉害', 'admin', '2022-4-22 0:59', 56);
+    (1, '讲得真好', 1, 1, '2022-4-22 17:59', 78),
+    (2, '讲得真棒', 2, 2, '2022-4-22 18:59', 24),
+    (3, '讲得真详细', 2, 1, '2022-4-22 20:59', 45),
+    (4, '讲得真仔细', 2, 3, '2022-4-22 22:59', 26),
+    (5, '讲得好厉害', 3, 3, '2022-4-22 0:59', 56);

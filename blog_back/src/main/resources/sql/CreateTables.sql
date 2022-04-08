@@ -21,10 +21,14 @@ CREATE TABLE `yyd_blog`.`article` (
                                       `summarize` text NULL,
                                       `author` VARCHAR(20) NULL,
                                       `coverImage` varchar(100) NULL,
+                                      `type` varchar(30) NULL,
                                       `tags`  varchar (50) NULL,
                                       `numberOfComment` INT NULL,
                                       `numberOfLike` INT NULL,
                                       `numberOfView` INT NULL,
+                                      `isView` tinyint(1) NULL,
+                                      `isPublicCommentArea` tinyint(1) NULL,
+                                      `isAllowedTurn` tinyint(1) NULL,
                                       PRIMARY KEY (`id`))
     ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

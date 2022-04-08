@@ -1,6 +1,7 @@
 package com.yyd.blog_back.contoller;
 
 import com.yyd.blog_back.common.Result;
+import com.yyd.blog_back.common.util.PrintfMessage;
 import com.yyd.blog_back.entity.Article;
 import com.yyd.blog_back.service.ArticleService;
 import org.apache.ibatis.annotations.Param;
@@ -37,6 +38,7 @@ public class ArticleController {
 
     @RequestMapping(value = "addArticle", method = RequestMethod.POST, produces = "application/json")
     public Result addArticle(@RequestBody Article article){
+        PrintfMessage.logRequest("addArticle");
         if (!articleService.addArticle(article)){
             return Result.error("添加文章失败");
         }

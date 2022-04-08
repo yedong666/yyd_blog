@@ -16,20 +16,20 @@
         text-color="black"
         active-text-color="#ffd04b"
       >
-        <el-menu-item>首页</el-menu-item>
+        <el-menu-item @click="jumpToHome" style="font-size: 25px">首页</el-menu-item>
         <el-submenu index="2">
-          <template slot="title"><p style="font-size: 25px">博客</p></template>
+          <template slot="title"><p style="font-size: 25px" @click="jumpToArticle">博客</p></template>
           <el-menu-item index="2-1">生活分享</el-menu-item>
           <el-menu-item index="2-2">文艺创作</el-menu-item>
           <el-submenu index="2-3">
-            <template slot="title"><p style="font-size: 25px">技术分享</p></template>
-            <el-menu-item index="2-3-1">Java</el-menu-item>
-            <el-menu-item index="2-3-2">前端</el-menu-item>
-            <el-menu-item index="2-3-3">算法</el-menu-item>
+            <template slot="title"><p style="font-size: 20px">技术分享</p></template>
+            <el-menu-item index="2-3-1" style="font-size: 15px">Java</el-menu-item>
+            <el-menu-item index="2-3-2" style="font-size: 15px">前端</el-menu-item>
+            <el-menu-item index="2-3-3" style="font-size: 15px">算法</el-menu-item>
           </el-submenu>
         </el-submenu>
         <el-menu-item index="3" disabled>消息中心</el-menu-item>
-        <el-menu-item index="4" disabled>写点啥</el-menu-item>
+        <el-menu-item index="4" @click="jumpToWrite" style="font-size: 25px">写点啥</el-menu-item>
         <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">后台管理</a></el-menu-item>
       </el-menu>
     </div>
@@ -85,6 +85,19 @@ export default {
       this.$router.push({ path: '/login' })
     },
 
+    jumpToHome(){
+      this.$router.push({ path: '/' })
+    },
+
+     jumpToWrite(){
+      this.$router.push({ path: '/blogwrite' })
+    },
+
+     jumpToArticle(){
+      this.$router.push({ path: '/blogview' })
+    },
+
+
     changeLogoutStyle() {
       if (this.logoutButtonStyle == 'margin: 10px; display: none') {
         this.logoutButtonStyle = 'margin: 10px; display: block'
@@ -105,7 +118,7 @@ export default {
 }
 
 .el-menu-item {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .user {
@@ -135,5 +148,9 @@ export default {
 
 .el-button:hover {
   background: #409eff;
+}
+
+.el-submenu .el-menu-item{
+  z-index: 1;
 }
 </style>

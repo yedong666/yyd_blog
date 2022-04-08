@@ -57,6 +57,11 @@ const router = new Router({
             component: () => import('../views/blog/BlogView.vue')
           },
           {
+            path: '/blogwrite',
+            name: 'write',
+            component: () => import('../views/blog/BlogWrite.vue')
+          },
+          {
             path: '/foot',
             name: 'FootBar',
             component: () => import('../components/FootBar.vue')

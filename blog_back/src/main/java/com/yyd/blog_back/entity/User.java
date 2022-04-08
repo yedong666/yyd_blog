@@ -1,6 +1,8 @@
 package com.yyd.blog_back.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -12,6 +14,7 @@ import java.io.Serializable;
 @TableName("user")
 public class User implements Serializable {
     @JsonProperty(value = "id")
+    @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
 
     @JsonProperty(value = "account")

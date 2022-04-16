@@ -1,12 +1,12 @@
 <template>
-  <div class="home">
+  <div class="blogWriteContainer">
     <div class="shadow" id="shadow" >
       <div class="formCard">
         <el-form :model="article" :rules="rules" ref="article" label-width="130px" class="article">
           <el-form-item label="文章概述" prop="summary">
             <el-input
               type="textarea"
-              v-model="article.summary"
+              v-model="article.summarize"
               :autosize="{ minRows: 2, maxRows: 4 }"
               style="width: 450px"
             ></el-input>
@@ -34,7 +34,7 @@
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
             >
-             <img v-if="imageUrl" :src="article.coverImage" class="avatar" />
+             <img v-if="article.coverImage" :src="article.coverImage" class="avatar" />
               <span v-else style="border: 1px solid black;">
                   <i  class="el-icon-plus avatar-uploader-icon"></i>
               </span>
@@ -95,7 +95,7 @@
       </el-container>
       <el-footer height="50px"><FootBar></FootBar></el-footer>
     </el-container>
-    <el-backtop target=".home" :bottom="100"></el-backtop>
+    <!-- <el-backtop target=".home" :bottom="100"></el-backtop> -->
   </div>
 </template>
 
@@ -171,7 +171,9 @@ export default {
           that.readyPublish()
           console.log(that.article)
           addArticleToBack(that.article)
-
+          that.$router.push({
+            path: '/',
+          })
         } else {
           console.log('error submit!!')
           return false
@@ -181,8 +183,10 @@ export default {
     resetForm(formName) {
       this.$refs[formName].resetFields()
     },
-    handleAvatarSuccess(res, file) {
-      this.article.coverImage = URL.createObjectURL(file.raw)
+    handleAvatarSuccess(res) {
+      console.log(res)
+      this.article.coverImage = res.data
+      console.log(this.article)
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg'
@@ -198,7 +202,6 @@ export default {
     },
 
     showForm() {
-        alert("ad")
       document.getElementById('shadow').style.display = 'block'
       document.getElementById('contant').style.opacity = '0.6'
     },
@@ -263,7 +266,7 @@ export default {
   background: rgba(255, 255, 255, 1);
   top: 200px;
   left: 31%;
-  width: 38%;
+  width: 40%;
   padding-top: 20px;
   border-radius: 10px;
   box-shadow: 10px 10px 5px #888888;

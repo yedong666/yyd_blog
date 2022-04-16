@@ -52,9 +52,13 @@ CREATE TABLE `yyd_blog`.`comments` (
                                        `id` INT NOT NULL AUTO_INCREMENT,
                                        `content`  text NULL,
                                        `observerId` INT NULL,
-                                        `articleId` INT NULL,
+                                       `articleId` INT NULL,
+                                       `replyId` INT NULL,
                                        `date` varchar(50) NULL,
                                        `numberOfLike` int NULL,
+                                       `numberOfReply` int NULL,
+                                       `numberOfView` int NULL,
+
                                        PRIMARY KEY (`id`))
     ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

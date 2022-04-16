@@ -31,6 +31,10 @@ public class ArticleService {
         return articleMapper.selectList(queryWrapper);
     }
 
+    public Article getArticleById(Integer id){
+        return articleMapper.selectById(id);
+    }
+
     /**
      * 添加文章
      * @return boolean

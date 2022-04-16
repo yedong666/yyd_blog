@@ -21,6 +21,15 @@ public class UserController {
         return Result.success(userService.getAllUsersData());
     }
 
+    @RequestMapping("getUserById")
+    private Result getUserById(@Param("id") Integer id){
+        User user = userService.getUserById(id);
+        if (user == null){
+            return Result.error("此用户id不存在");
+        }
+        return Result.success(user);
+    }
+
 
     @RequestMapping("login")
     private Result login(@Param("account") String account, @Param("password") String password){

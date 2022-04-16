@@ -1,13 +1,14 @@
 <template>
   <div class="home">
     <el-container>
-      <el-container>
+      <el-container class="head">
           <el-header height="100px"><Background></Background> </el-header>
-          <el-footer style="padding: 0;" height="60px"><NavBar></NavBar></el-footer>
+          <el-footer style="padding: 0;" height="60px"><NavBar @show="showUserMenuBar"></NavBar></el-footer>
       </el-container>
-      <el-container>
-        <el-main><BlogShow></BlogShow></el-main>
-        <el-aside width="640px"><MeShow></MeShow> <SortBar></SortBar></el-aside>
+      <el-container class="main">
+        <el-aside width="11%"  v-if = "isShow"><UserMenuBar @closeMenu="showUserMenuBar"></UserMenuBar></el-aside>
+        <el-main ><BlogShow></BlogShow></el-main>
+        <el-aside width="29%"><MeShow></MeShow> <SortBar></SortBar></el-aside>
       </el-container>
       <el-footer height="50px"><FootBar></FootBar></el-footer>
     </el-container>
@@ -23,17 +24,29 @@ import BlogShow from '@/views/blog/BlogShow.vue'
 import MeShow from '@/components/MeShow.vue'
 import SortBar from '@/components/SortBar.vue'
 import FootBar from '@/components/FootBar.vue'
+import UserMenuBar from '@/components/UserMenuBar.vue'
+
 
 export default {
   data() {
     return {
-      user:{}
+      user:{},
+      isShow: false,
     }
   },
 
   // created(){
+  //   location.reload()
+  // },
+  // created(){
   //   this.user = this.$route.query.user
   // },
+  methods:{
+    showUserMenuBar(isShow){
+      this.isShow = isShow
+    },
+
+  },
 
   components: {
     Background,
@@ -42,18 +55,28 @@ export default {
     MeShow,
     SortBar,
     FootBar,
+    UserMenuBar,
   },
 }
 </script>
 
 <style scoped>
-.el-header{
-    padding: 0;
-}
-.el-aside{
-}
-.el-main{
-}
-.el-footer {
-}
+  .home{
+    width: 100%;
+    height: 100%;
+  }
+
+  .home .main{
+    width: 100%;
+  }
+
+  .home .main .el-main{
+    overflow: hidden;
+  }
+
+  .home .main .el-aside{
+    overflow: hidden;
+  }
+  
+
 </style>

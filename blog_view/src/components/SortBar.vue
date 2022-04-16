@@ -46,28 +46,27 @@ export default {
   right: 150px;
   top: 820px; */
   background: #e0f6ff;
-  width: 530px;
+  width: 90%;
   margin: auto;
   margin-top: 20px;
-   margin-left: 50px;
     /* opacity: 90%; */
 }
 
-h2 {
+.sortBar-container h2 {
   margin-top: 20px;
 }
 
-.link-container {
+.sortBar-container .link-container {
   width: 100%;
   background: #b8ddf7;
   margin-bottom: 20px;
   overflow: hidden;;
 }
 
-.el-row {
+.sortBar-container .el-row {
   margin-top: 20px;
 }
-.el-link {
+.sortBar-container .el-link {
   font-size: 25px;
 }
 </style>

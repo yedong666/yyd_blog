@@ -1,6 +1,6 @@
 <template>
     <div class="blogs">
-        <BlogCard v-for="i in array" :key="i">
+        <BlogCard v-for="article, i in articles" :key="i" :article = "article">
 
         </BlogCard>
     </div>
@@ -11,11 +11,24 @@
 
 import BlogCard from '@/components/BlogCard.vue'
 
+import {getAllArticlesFromBack} from '@/apis/articles'
+
 export default {
     data(){
         return{
             array: [1, 2, 3, 4, 5],
+            articles: []
         }
+    },
+
+     mounted(){
+        let that = this
+         getAllArticlesFromBack().then(response=>{
+             that.articles =  response.data.data
+             this.$store.commit('saveArticles', that.articles)
+         }).catch(error => { 
+          console.log(error)
+        })
     },
 
     components:{
@@ -30,11 +43,12 @@ export default {
         /* position: absolute; */
         /* top: 180px;
         left: 150px; */
+        width: 96%;
         padding-top: 10px;
         padding-bottom: 10px;
-        width: 1100px;
+        margin:auto;
         background: #b8ddf7;
-        margin-left: 100px;
+        overflow: hidden;
         /* opacity: 90%; */
     }
 </style>

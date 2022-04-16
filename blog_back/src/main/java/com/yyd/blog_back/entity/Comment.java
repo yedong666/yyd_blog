@@ -16,8 +16,12 @@ public class Comment {
     private Integer observerId;
     @TableField("articleId")
     private Integer articleId;
+    @TableField("replyId")
     private String date;
     @TableField("numberOfLike")
     private Integer numberOfLike;
-
+    @TableField("numberOfReply")
+    private Integer numberOfReply;
+    @TableField("numberOfView")
+    private Integer numberOfView;
 }

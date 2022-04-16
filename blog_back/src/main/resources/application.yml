@@ -24,3 +24,6 @@ spring:
       max-pool-prepared-statement-per-connection-size: 20
       time-between-eviction-runs-millis: 60000
       min-evictable-idle-time-millis: 300000
+  devtools:
+    restart:
+      additional-paths: src/main/resource/static/

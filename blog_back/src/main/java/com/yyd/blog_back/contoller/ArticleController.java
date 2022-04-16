@@ -27,6 +27,16 @@ public class ArticleController {
         return Result.success(articles);
     }
 
+    @RequestMapping("getArticleById")
+    public Result getArticleById(@Param("id") Integer id){
+        Article article = articleService.getArticleById(id);
+        System.out.println(id);
+        if (article == null){
+            return Result.error("id不存在");
+        }
+        return Result.success(article);
+    }
+
     @RequestMapping("getArticlesByAuthor")
     public Result getArticlesByAuthor(@Param("author") String author){
         List<Article> articles = articleService.getArticlesByAuthor(author);

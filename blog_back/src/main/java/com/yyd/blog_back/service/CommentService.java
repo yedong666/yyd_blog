@@ -13,9 +13,19 @@ public class CommentService {
     @Autowired
     private CommentMapper commentMapper;
 
-    public List<Comment> getCommentByArticleId(Integer arctileId){
+    public List<Comment> getCommentByArticleId(Integer artileId){
         QueryWrapper<Comment> queryWrapper = new QueryWrapper<>();
-        queryWrapper.eq("arcticleId", arctileId);
+        queryWrapper.eq("articleId", artileId);
         return commentMapper.selectList(queryWrapper);
+    }
+
+    public boolean addComment(Comment comment){
+        try {
+            commentMapper.insert(comment);
+            return true;
+        }catch (Exception e){
+            System.out.println("发表评论出现异常");
+            return false;
+        }
     }
 }

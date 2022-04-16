@@ -1,5 +1,5 @@
 <template>
-    <div class="footer">
+    <div class="footerContainer">
         <el-row>
             <el-col :span="24">
                 <h3>Copyright © 2022叶栋个人博客</h3>
@@ -15,10 +15,9 @@ export default {
 </script>
 
 <style scoped>
-    .footer{
+    .footerContainer{
         background: #b8ddf7;
         margin: auto;
         line-height: 50px;
-         opacity: 90%;
     }
 </style>

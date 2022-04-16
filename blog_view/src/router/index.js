@@ -4,6 +4,7 @@ import Router from 'vue-router'
 Vue.use(Router)
 
 const router = new Router({
+    base: '/blog_view/',
     routes: [
         {
             path: '/login',

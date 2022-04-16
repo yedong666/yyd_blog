@@ -22,14 +22,13 @@ public class FileController {
         }
 
         String fileName = file.getOriginalFilename();
-        String filePath = "C:\\Users\\lee\\Desktop\\myblog\\blog_back\\src\\main\\resources\\static\\";
+        String filePath = "C:\\Users\\lee\\Desktop\\myblog\\blog_back\\src\\main\\resources\\static\\imgs\\articleCoverImg\\";
         File dest = new File(filePath + fileName);
         try {
             file.transferTo(dest);
-            return Result.success(filePath + fileName);
+            return Result.success("http://localhost:8888/imgs/articleCoverImg/"+fileName);
         } catch (IOException e) {
-
+            return Result.error("上传失败, 请重试");
         }
-        return Result.error("上传失败");
     }
 }

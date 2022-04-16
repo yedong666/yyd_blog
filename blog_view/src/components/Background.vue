@@ -1,5 +1,5 @@
 <template>
-  <div class="block">
+  <div class="backgroundContainer">
       <h1>用文字记录生活，用记忆追寻时光</h1>
   </div>
 </template>
@@ -14,13 +14,13 @@ export default {
 }
 </script>
 <style scoped>
-    .block{
+    .backgroundContainer{
         width: 100%;
-        height: 100px;
+        height: 100%;
         background-repeat:repeat;
     }
 
-    .block h1{  
+    .backgroundContainer h1{  
       line-height: 100px;
        font-size: 40px;
             background-image: linear-gradient(135deg,rgb(0, 195, 255),rgb(176, 176, 202));

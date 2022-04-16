@@ -107,7 +107,7 @@ export default {
 }
 </script>
 
-<style>
+<style scoped>
 .formContainer {
   position: absolute;
   width: 100%;
@@ -117,15 +117,15 @@ export default {
   background-image: url('../assets/gif-bg1.gif');
 }
 
-el-input {
+.formContainer el-input {
   background: linear-gradient(to right, #facabb);
 }
 
-el-button {
+.formContainer el-button {
   background: linear-gradient(to right, #facabb);
 }
 
-.loginForm {
+.formContainer .loginForm {
   border-radius: 15px;
   background-clip: padding-box;
   margin: 288px auto;

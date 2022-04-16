@@ -35,4 +35,8 @@ public class UserService {
         userMapper.insert(newUser);
         return newUser;
     }
+
+    public User getUserById(Integer id){
+        return userMapper.selectById(id);
+    }
 }

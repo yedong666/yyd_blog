@@ -1,5 +1,5 @@
 <template>
-  <div class="formContainer">
+  <div class="reginsterContainer">
     <el-form label-position="left" ref="form" :model="user" class="loginForm" :rules="rules">
       <h2 style="margin-bottom: 10px; color: rgb(0, 195, 255">注册</h2>
       <el-form-item prop="name">
@@ -132,8 +132,8 @@ export default {
 }
 </script>
 
-<style>
-.formContainer{
+<style scoped>
+.reginsterContainer{
     position: absolute;
     width: 100%;
     height: 100%;
@@ -144,15 +144,15 @@ export default {
     background-size: cover;
 }
 
-.el-input{
+.reginsterContainer .el-input{
     border: 1px solid rgb(182, 170, 170);
 }
 
-el-button{
+.reginsterContainer el-button{
     background: linear-gradient(to right, #facabb , );
 }
 
-.loginForm {
+.reginsterContainer .loginForm {
   border-radius: 15px;
   background-clip: padding-box;
   margin: 200px auto;

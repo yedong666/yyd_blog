@@ -12,9 +12,13 @@ export default new Vuex.Store({
     password: '',
     nickname: '',
     status: '', 
+    articles: [],
     userData: getUserData(),
   },
   mutations: {
+    saveArticles(state, articles){
+      state.articles = articles
+    },
     SET_TOKEN: (state, token) => {
       state.userData = token;
     },

@@ -1,10 +1,10 @@
 <template>
   <div class="nav">
-    <div class="user">
-      <el-button style="margin: 10px" @click="jumpToLogin">
+    <div class="user" @mouseover="showMenu(true)">
+      <el-button style="margin: 10px; margin-left: 38px;" @click="jumpToLogin">
         {{ userMessage }}
       </el-button>
-      <el-button :style="logoutButtonStyle" @click="jumpToLogout"> 退出 </el-button>
+      <!-- <el-button :style="logoutButtonStyle" @click="jumpToLogout"> 退出 </el-button> -->
     </div>
     <div class="menuContainer">
       <el-menu
@@ -34,7 +34,7 @@
       </el-menu>
     </div>
     <el-input placeholder="请输入内容" v-model="searchInput" class="input-with-select">
-      <el-button slot="append" icon="el-icon-search"></el-button>
+      <el-button  slot="append" icon="el-icon-search"></el-button>
     </el-input>
   </div>
 </template>
@@ -97,6 +97,11 @@ export default {
       this.$router.push({ path: '/blogview' })
     },
 
+    showMenu(isShow){
+      this.$emit('show', isShow)
+    },
+    
+
 
     changeLogoutStyle() {
       if (this.logoutButtonStyle == 'margin: 10px; display: none') {
@@ -112,45 +117,43 @@ export default {
 <style scoped>
 .nav {
   width: 100%;
-  height: 65px;
+  height: 100%;
   background: #b2cce1;
   /* opacity: 90%; */
 }
 
-.el-menu-item {
+.nav .el-menu-item {
   font-size: 20px;
 }
 
-.user {
+.nav .user {
   position: absolute;
   left: 10px;
 }
 
-.menuContainer {
+.nav .menuContainer {
   position: absolute;
   left: 250px;
 }
 
-.el-input {
+.nav .el-input {
   margin-top: 10px;
-  margin-left: 1250px;
-  border-radius: 0;
+  margin-left: 980px;
   width: 200px;
   height: 40px;
   font-size: 20px;
 }
 
-.el-button {
-  background: #80b7de;
-  color: aqua;
-  font-size: 20px;
+.nav .el-input .el-button:hover{
+  background: rgb(46, 155, 219);
+  border-left: 0px;
+  border-right: 0;
+
 }
 
-.el-button:hover {
-  background: #409eff;
-}
 
-.el-submenu .el-menu-item{
+
+.nav .el-submenu .el-menu-item{
   z-index: 1;
 }
 </style>

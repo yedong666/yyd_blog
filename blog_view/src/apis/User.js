@@ -13,6 +13,19 @@ export function loginToBack(account, password) {
     })
 }
 
+export function getUserByIdFromBack(userId){
+  return request({
+    url: '/getUserById',
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    params:{
+        id: userId,
+    },
+  })
+}
+
 export function registerToBack(user){
   alert("开始注册")
   return request({

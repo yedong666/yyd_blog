@@ -12,3 +12,14 @@ export function getCommentByArticleIdFromBack(articleId){
         },
       })
 }
+
+export function addCommentToBack(comment){
+  return request({
+    url: '/addComment',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data: JSON.stringify(comment),
+  })
+}

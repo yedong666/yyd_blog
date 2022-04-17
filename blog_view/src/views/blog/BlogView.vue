@@ -40,7 +40,7 @@
                   show-word-limit
                   style="font-size: 20px"
                 ></el-input>
-                <el-button style="width: 100%; margin-top: 5px; font-size: 20px" type="primary">确认发表</el-button>
+                <el-button style="width: 100%; margin-top: 5px; font-size: 20px" type="primary" @click="publishComment">确认发表</el-button>
               </div>
               <div class="comments" v-if="comments">
                 <div class="comment" v-for="(comment, i) in comments" :key="i">
@@ -80,7 +80,7 @@ import SortBar from '@/components/SortBar.vue'
 import FootBar from '@/components/FootBar.vue'
 import UserMenuBar from '@/components/UserMenuBar.vue'
 import { getArticleByIdFromBack } from '@/apis/articles.js'
-import { getCommentByArticleIdFromBack } from '@/apis/comments.js'
+import { getCommentByArticleIdFromBack, addCommentToBack } from '@/apis/comments.js'
 import { getUserByIdFromBack } from '@/apis/user.js'
 
 export default {
@@ -130,25 +130,60 @@ export default {
     showUserMenuBar(isShow) {
       this.isShow = isShow
     },
+    //小于10的拼接上0字符串
+   addZero(s) {
+    return s < 10 ? ('0' + s) : s;
+    },
 
-    // async getObserverName(observerId, callback){
-    //   //let that = this
-    //   // let name
-    //   // let that = this
-    //   let res = await getUserByIdFromBack(observerId)
-    //   // alert(res.data.data.nickname)
-    //   this.users.push(res.data.data)
-    //   callback(res.data.data.nickname)
-    // },
+    getNowDate(){
+      var date = new Date();
+    //年 getFullYear()：四位数字返回年份
+    var year = date.getFullYear();  //getFullYear()代替getYear()
+    //月 getMonth()：0 ~ 11
+    var month = date.getMonth() + 1;
+    //日 getDate()：(1 ~ 31)
+    var day = date.getDate();
+    //时 getHours()：(0 ~ 23)
+    var hour = date.getHours();
+    //分 getMinutes()： (0 ~ 59)
+    var minute = date.getMinutes();
+    //秒 getSeconds()：(0 ~ 59)
+    var second = date.getSeconds();
 
-    // returnName(name){
-    //   return name
-    // }
+    var time = year + '-' + this.addZero(month) + '-' + this.addZero(day) + ' ' + this.addZero(hour) + ':' + this.addZero(minute) + ':' + this.addZero(second);
+    return time;
+    },
+
+    publishComment(){
+      if (this.comment.length == 0){
+        alert("评论不可以为空哦")
+      }else{
+        if (this.$store.state.userData == null){
+          alert("需要登录后才可以评论")
+        }else{
+          let comment = {
+            content: this.comment,
+            observerId: JSON.parse(this.$store.state.userData).id,
+            articleId: this.id,
+            //评论的replyId属性都为0
+            replyId: 0,
+            date: this.getNowDate(),
+            numberOfLike: 0,
+            numberOfReply: 0,
+            numberOfView: 0,
+          }
+          addCommentToBack(comment).then(response =>{
+            alert(response.data.data)
+            location.reload()
+          }).catch(error => {
+            console.log(error)
+            alert("发布评论失败")
+          })
+
+        }
+      }
+    }
   },
-
-  // created(){
-  //   this.user = this.$route.query.user
-  // },
 
   components: {
     Background,
@@ -171,8 +206,6 @@ export default {
   background: #b8ddf7;
 }
 
-.articleHead {
-}
 
 .articleHead h1 {
   font-size: 30px;
@@ -187,9 +220,6 @@ export default {
   font-size: 15px;
   margin-left: 5px;
   margin-bottom: 10px;
-}
-
-.articleFooter {
 }
 
 .articleContent {

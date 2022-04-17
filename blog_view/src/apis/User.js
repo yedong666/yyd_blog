@@ -46,6 +46,6 @@ export function logoutFromBack(state){
     headers: {
       'Content-Type': 'application/json'
     },
-    data: JSON.stringify(state),
+    data: state,
   })
 }

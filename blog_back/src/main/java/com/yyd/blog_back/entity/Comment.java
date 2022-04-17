@@ -17,6 +17,7 @@ public class Comment {
     @TableField("articleId")
     private Integer articleId;
     @TableField("replyId")
+    private String replyId;
     private String date;
     @TableField("numberOfLike")
     private Integer numberOfLike;

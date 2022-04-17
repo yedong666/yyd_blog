@@ -3,8 +3,6 @@
         <el-menu
       default-active="2"
       class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
       background-color="#b8ddf7"
       text-color="black"
       >
@@ -12,7 +10,7 @@
         <i class="el-icon-menu"></i>
         <span slot="title">设置&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item index="2" @click="logout">
         <i class="el-icon-setting"></i>
         <span slot="title">退出&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </el-menu-item>
@@ -37,6 +35,8 @@
 </template>
 
 <script>
+// import {removeToken} from '@/request/token'
+
 export default {
     name: 'UserMenuBar',
     data(){
@@ -47,7 +47,16 @@ export default {
     methods:{
         closeMenu(){
             this.$emit("closeMenu", false)
+        },
+
+        logout(){
+          alert("确定退出吗")
+          this.$store.dispatch('logout', this.$store.state.userData).then(()=>{
+            location.reload();
+          })  
         }
+
+
     }
 
 }

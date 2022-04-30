@@ -1,7 +1,7 @@
 <template>
   <div class="blogCardContainer">
     <el-container>
-      <el-aside style="width:220px;">
+      <el-aside width="35%" v-if="flag">
          <div class="categories" style="float: top">
                   <el-tag>{{tags[0]}}</el-tag>
                   <el-tag type="success">{{tags[1]}}</el-tag>
@@ -12,7 +12,7 @@
           </el-image>
            
       </el-aside>
-      <el-container style="width: 400px">
+      <el-container>
         <el-header>
             <h3>
                 {{article.title}}
@@ -39,6 +39,7 @@ export default {
     name: 'BlogCard',
     data(){
         return{
+          flag: true,
             // article: {
             //     title: 'Java的前世今生',
             //     content: 'Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念,' +
@@ -58,6 +59,11 @@ export default {
       article: Object,
     },
     mounted(){
+     
+    if (document.body.clientWidth < 480){
+      this.flag = false
+    }
+  
       console.log(this.article)
       this.tags = this.article.tags.split(',')
       this.article.tags = this.tags
@@ -78,7 +84,15 @@ export default {
 </script>
 
 <style scoped>
-  .blogCardContainer{
+  @media screen and (max-width: 768px) {
+    .blogCardContainer{
+      width: 98%;
+      margin: auto;
+    }
+  }
+
+  @media screen and (min-width: 1200px){
+     .blogCardContainer{
       box-shadow: 10px 10px 10px 10px gray;
       border-radius: 15px;
       margin: 50px 50px;
@@ -157,6 +171,9 @@ export default {
       margin-right: 5px; 
       margin-top: 5px;
   }
+  }
+
+ 
 
 
 

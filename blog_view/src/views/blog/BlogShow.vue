@@ -39,6 +39,11 @@ export default {
 
 
 <style scoped>
+    @media screen and (max-width: 768px){
+        .blogs{
+            width: 100%;
+        }
+    }
     .blogs{
         /* position: absolute; */
         /* top: 180px;

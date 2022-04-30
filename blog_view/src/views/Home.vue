@@ -3,12 +3,12 @@
     <el-container>
       <el-container class="head">
           <el-header height="100px"><Background></Background> </el-header>
-          <el-footer style="padding: 0;" height="60px"><NavBar @show="showUserMenuBar"></NavBar></el-footer>
+          <el-footer style="padding: 0;" height="60px" v-if="flag"><NavBar @show="showUserMenuBar"></NavBar></el-footer>
       </el-container>
       <el-container class="main">
         <el-aside width="11%"  v-if = "isShow"><UserMenuBar @closeMenu="showUserMenuBar"></UserMenuBar></el-aside>
         <el-main ><BlogShow></BlogShow></el-main>
-        <el-aside width="29%"><MeShow></MeShow> <SortBar></SortBar></el-aside>
+        <el-aside width="29%" v-if="flag"><MeShow></MeShow> <SortBar></SortBar></el-aside>
       </el-container>
       <el-footer height="50px"><FootBar></FootBar></el-footer>
     </el-container>
@@ -32,6 +32,16 @@ export default {
     return {
       user:{},
       isShow: false,
+      flag: true,
+    }
+  },
+
+  mounted(){
+    if (document.body.clientWidth < 780){
+      this.flag = false
+      this.$router.push({
+                path: '/mobile',
+              })
     }
   },
 
@@ -76,6 +86,12 @@ export default {
 
   .home .main .el-aside{
     overflow: hidden;
+  }
+
+  @media screen and(max-width: 375px){
+    .main .el-aside{
+      display: none;
+    }
   }
   
 

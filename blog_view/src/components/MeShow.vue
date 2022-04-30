@@ -35,10 +35,10 @@
             <img src="..\assets\电话.png" alt="">
           </el-col>
           <el-col :span="8">
-            <p>17585629859</p>
+            <p>112233</p>
           </el-col>
           <el-col :span="4">
-            <img src="..\assets\微信.png" alt="">
+            <img src="..\assets\wechat.png" alt="">
           </el-col>
           <el-col :span="8">
               <p>yyd97851</p>

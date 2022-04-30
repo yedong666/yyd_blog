@@ -45,8 +45,8 @@
   .me-to-top {
     background-color: #fff;
     position: fixed;
-    right: 100px;
-    bottom: 150px;
+    right: 30px;
+    bottom: 170px;
     width: 40px;
     height: 40px;
     border-radius: 20px;

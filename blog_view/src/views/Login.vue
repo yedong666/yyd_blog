@@ -1,7 +1,10 @@
 <template>
   <div class="formContainer">
+    <div class="headImg">
+      <img src="https://img0.baidu.com/it/u=1242273181,3992362129&fm=26&fmt=auto">
+    </div>
     <el-form label-position="left" ref="form" :model="user" class="loginForm" :rules="rules">
-      <h2 style="margin-bottom: 10px; color: rgb(0, 195, 255">欢迎访问叶栋的个人博客</h2>
+      <h2 style="margin-bottom: 10px; color: white">欢迎访问叶栋的个人博客</h2>
       <el-form-item prop="account">
         <el-input type="text" auto-complete="false" placeholder="账号" v-model="user.account"></el-input>
       </el-form-item>
@@ -14,9 +17,9 @@
           type="text"
           placeholder="验证码"
           v-model="user.code"
-          style="width: 188px; float: left; margin-right: 10px"
+          style="width: 45%; float: left; margin-right:10px "
         ></el-input>
-        <valid-code :value.sync="validCode"></valid-code>
+        <valid-code></valid-code>
       </el-form-item>
       <el-tooltip class="item" effect="dark" content="登录后才能获得完整权限" placement="top">
         <el-button @click="login('form')">登录</el-button>
@@ -110,11 +113,21 @@ export default {
 <style scoped>
 .formContainer {
   position: absolute;
+  display: flex;
+  flex-direction: column;
+
   width: 100%;
   height: 100%;
   top: 0;
   margin: 0 auto;
   background-image: url('../assets/gif-bg1.gif');
+}
+
+@media screen and (max-width:780px) {
+  .formContainer{
+    background-image: linear-gradient(141deg,#9fb8ad 0%,#1fc8db 51%,#2cb5e8 75%);
+    color: wheat;
+  }
 }
 
 .formContainer el-input {
@@ -125,12 +138,24 @@ export default {
   background: linear-gradient(to right, #facabb);
 }
 
+.formContainer .headImg{
+  width: 100%;
+  margin-top: 50px;
+}
+
+.formContainer .headImg img{
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+}
+
 .formContainer .loginForm {
+  height: 40vh;
   border-radius: 15px;
   background-clip: padding-box;
-  margin: 288px auto;
   box-shadow: 0 0 10px gray;
-  width: 350px;
+  margin:30px auto;
+  width: 300px;
   padding: 15px 35px 15px 35px;
   border: 1px solid gray;
 }

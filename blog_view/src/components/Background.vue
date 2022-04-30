@@ -14,7 +14,22 @@ export default {
 }
 </script>
 <style scoped>
-    .backgroundContainer{
+    @media screen and (max-width: 768px){
+        .backgroundContainer{
+        width: 100%;
+        height: 100%;
+        }
+
+        .backgroundContainer h1{  
+           display: block;
+           line-height: 100px;
+           font-size: 25px;
+        }
+
+    }
+
+    @media screen and (min-width: 1200px){
+       .backgroundContainer{
         width: 100%;
         height: 100%;
         background-repeat:repeat;
@@ -28,5 +43,7 @@ export default {
             -webkit-background-clip:text;
             color: transparent;
     }
+    }
+   
 
 </style>

@@ -9,6 +9,7 @@
     <div class="menuContainer">
       <el-menu
         :default-active="activeIndex2"
+       
         class="el-menu-nav"
         mode="horizontal"
         @select="handleSelect"
@@ -33,9 +34,13 @@
         <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">后台管理</a></el-menu-item>
       </el-menu>
     </div>
-    <el-input placeholder="请输入内容" v-model="searchInput" class="input-with-select">
-      <el-button  slot="append" icon="el-icon-search"></el-button>
-    </el-input>
+
+    <div class="searchBar">
+      <el-input placeholder="请输入内容" v-model="searchInput" class="input-with-select">
+          <el-button  slot="append" icon="el-icon-search"></el-button>
+          </el-input>
+    </div>
+    
   </div>
 </template>
 
@@ -134,11 +139,11 @@ export default {
 .nav .menuContainer {
   position: absolute;
   left: 250px;
+  overflow: hidden;
 }
 
 .nav .el-input {
-  margin-top: 10px;
-  margin-left: 980px;
+  margin: auto;
   width: 200px;
   height: 40px;
   font-size: 20px;
@@ -156,4 +161,13 @@ export default {
 .nav .el-submenu .el-menu-item{
   z-index: 1;
 }
+
+.searchBar{
+  float: right;
+  margin: auto 120px;
+  margin-top: 10px;
+  background: chartreuse;
+}
+
+
 </style>

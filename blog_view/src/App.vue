@@ -1,7 +1,7 @@
 <template>
   <div id="app">
       <router-view></router-view>
-      <GoTop></GoTop>
+      <GoTop class="goTop"></GoTop>
   </div>
 </template>
 
@@ -24,11 +24,23 @@ export default {
   border: 0;
 }
 
-body{
+@media screen and (min-width: 800px){
+   body{
   /**/
   background: url('./assets/gif-bg1.gif');
   background-repeat: no-repeat;
   background-size: cover;
+}
+}
+
+@media screen and (max-width: 700px){
+   body{
+  /**/
+    background-color: #1fc8db;
+    background-image: linear-gradient(141deg,#9fb8ad 0%,#1fc8db 51%,#2cb5e8 75%);
+    opacity: 0.95;
+    }
+
 }
 
 #app {

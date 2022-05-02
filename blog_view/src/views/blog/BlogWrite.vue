@@ -1,6 +1,6 @@
 <template>
   <div class="blogWriteContainer">
-    <div class="shadow" id="shadow" >
+    <div class="shadow" id="shadow">
       <div class="formCard">
         <el-form :model="article" :rules="rules" ref="article" label-width="130px" class="article">
           <el-form-item label="文章概述" prop="summary">
@@ -34,28 +34,27 @@
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
             >
-             <img v-if="article.coverImage" :src="article.coverImage" class="avatar" />
-              <span v-else style="border: 1px solid black;">
-                  <i  class="el-icon-plus avatar-uploader-icon"></i>
+              <img v-if="article.coverImage" :src="article.coverImage" class="avatar" />
+              <span v-else style="border: 1px solid black">
+                <i class="el-icon-plus avatar-uploader-icon"></i>
               </span>
-             
             </el-upload>
           </el-form-item>
           <el-form-item label="是否所有人可见" prop="resource">
             <el-radio-group v-model="article.isView">
-              <el-radio v-model="article.isView" :label="true" >是</el-radio>
+              <el-radio v-model="article.isView" :label="true">是</el-radio>
               <el-radio v-model="article.isView" :label="false">否</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="是否开放评论区" prop="resource">
             <el-radio-group v-model="article.isPublicCommentArea">
-              <el-radio v-model="article.isPublicCommentArea" :label="true" >是</el-radio>
+              <el-radio v-model="article.isPublicCommentArea" :label="true">是</el-radio>
               <el-radio v-model="article.isPublicCommentArea" :label="false">否</el-radio>
             </el-radio-group>
           </el-form-item>
           <el-form-item label="是否允许转载" prop="resource">
             <el-radio-group v-model="article.isAllowedTurn">
-             <el-radio v-model="article.isAllowedTurn" :label="true" >是</el-radio>
+              <el-radio v-model="article.isAllowedTurn" :label="true">是</el-radio>
               <el-radio v-model="article.isAllowedTurn" :label="false">否</el-radio>
             </el-radio-group>
           </el-form-item>
@@ -70,7 +69,7 @@
     <el-container id="contant">
       <el-container>
         <el-header height="100px"><Background></Background> </el-header>
-        <el-footer style="padding: 0" height="60px"><NavBar ></NavBar></el-footer>
+        <el-footer style="padding: 0" height="60px"><NavBar></NavBar></el-footer>
       </el-container>
       <el-container style="z-index: 1">
         <el-header height="50px" style="margin-top: 10px">
@@ -83,10 +82,13 @@
         </el-header>
         <el-main style="margin-top: 10px; padding: 0; margin-bottom: 5px">
           <el-card id="writeContainer">
-            <p>欢迎使用 <b>wangEditor</b> 富文本编辑器</p>
+            <div id="toolbar-container"></div>
+            <div id="editor-container"></div>
           </el-card>
           <el-card>
-            <div id="textShow" style="height: 100%"></div>
+            <div id="textShow" v-html="article.content"  style="height: 100%" v-highlight>
+              
+            </div>
           </el-card>
         </el-main>
         <el-footer style="background: white; margin: auto; width: 98%; margin-bottom: 10px; padding: 0" height="40px">
@@ -103,9 +105,11 @@
 import Background from '@/components/Background.vue'
 import NavBar from '@/components/NavBar.vue'
 import FootBar from '@/components/FootBar.vue'
-import E from 'wangeditor'
-import {addArticleToBack} from '@/apis/articles.js'
+import '@wangeditor/editor/dist/css/style.css'
+import { createEditor, createToolbar} from '@wangeditor/editor'
+import { addArticleToBack } from '@/apis/articles.js'
 import { getUserData } from '@/request/token.js'
+
 // import $ from 'jquery'
 
 export default {
@@ -118,7 +122,7 @@ export default {
         title: '',
         content: '',
         summarize: '',
-        author: '', 
+        author: '',
         coverImage: '',
         type: '',
         tags: [],
@@ -129,6 +133,7 @@ export default {
         isPublicCommentArea: true,
         isAllowedTurn: true,
       },
+      
       rules: {
         summarize: [
           { required: true, message: '请输入文章概览', trigger: 'blur' },
@@ -141,19 +146,32 @@ export default {
   },
 
   mounted() {
-    const editor = new E('#writeContainer')
-    editor.config.height = 800
-    //  const $text1 = $('#textShow')
-    editor.config.placeholder = '请在此输入内容'
-    editor.config.focus = false
-    let that = this
-    editor.config.onchange = function (html) {
-      // 第二步，监控变化，同步更新到 textarea
-      document.getElementById('textShow').innerHTML = html
-      that.article.content = html
+    const editorConfig  = {}
+    editorConfig.placeholder = '请输入内容'
+    const that = this
+    editorConfig.onChange = (editor) => {
+      // 当编辑器选区、内容变化时，即触发
+    // const content = editor.children
+    // const contentStr = JSON.stringify(content)
+    // document.getElementById('textarea-1').value = contentStr
+   
+
+    const html = editor.getHtml()
+    that.article.content = html
     }
-    //  $text1.innerHTML = editor.txt.html()
-    editor.create()
+
+    // 创建编辑器
+    const editor = createEditor({
+      selector: '#editor-container',
+      config: editorConfig,
+      mode: 'default', // 或 'simple' 参考下文
+    })
+    // 创建工具栏
+    createToolbar({
+      editor,
+      selector: '#toolbar-container',
+      mode: 'default', // 或 'simple' 参考下文
+    })
   },
 
   components: {
@@ -206,16 +224,15 @@ export default {
       document.getElementById('contant').style.opacity = '0.6'
     },
 
-    cancelPublish(){
-         document.getElementById('shadow').style.display = 'none'
-         document.getElementById('contant').style.opacity = '1'
+    cancelPublish() {
+      document.getElementById('shadow').style.display = 'none'
+      document.getElementById('contant').style.opacity = '1'
     },
 
-    readyPublish(){
-        this.article.author = JSON.parse(getUserData()).id
-        this.article.tags = this.article.tags.toString()
-    }
-
+    readyPublish() {
+      this.article.author = JSON.parse(getUserData()).id
+      this.article.tags = this.article.tags.toString()
+    },
   },
 }
 </script>
@@ -238,18 +255,18 @@ export default {
 }
 
 .avatar {
-    width: 378px;
-    height: 198px;
-    display: block;
-  }
+  width: 378px;
+  height: 198px;
+  display: block;
+}
 
 .avatar-uploader .el-upload {
-    border: 1px dashed #d9d9d9;
-    border-radius: 6px;
-    cursor: pointer;
-    position: relative;
-    overflow: hidden;
-  }  
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
 
 .shadow {
   position: absolute;
@@ -275,4 +292,9 @@ export default {
 .el-form {
   width: 90%;
 }
+
+#textShow{
+  font-size: 20px;
+}
+
 </style>

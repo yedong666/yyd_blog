@@ -185,6 +185,11 @@ export default {
 </script>
 
 <style scoped>
+
+.articleHead{
+  margin-top: 30px;
+}
+
 .articleHead h1 {
   font-size: 30px;
 }

@@ -18,8 +18,7 @@
                 <el-tag type="info" style="left: 144px">{{ article.tags[2] }}</el-tag>
               </div>
             </div>
-            <div class="articleContent" v-html="article.content">
-              {{ article.content }}
+            <div class="articleContent" v-html="article.content" v-highlight>
             </div>
             <div class="articleFooter">
               <div class="articleMessages">
@@ -48,7 +47,7 @@
                     <el-avatar icon="el-icon-user-solid"></el-avatar>
                     <p class="commentName" v-if="users[i]">{{ users[i].nickname }}</p>
                   </div>
-                  <div class="commentContent">
+                  <div class="commentContent" v-highlight>
                     <p>
                       {{ comment.content }}
                     </p>

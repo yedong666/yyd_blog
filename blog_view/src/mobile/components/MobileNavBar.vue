@@ -24,13 +24,13 @@
                 </li>
                  <li class="b">
                       <div class="item">
-                        <i class="el-icon-s-tools"></i>
+                        <i class="el-icon-s-home"></i>
                         <span>主页</span>
                     </div>
                 </li>
                  <li class="c">
                       <div class="item">
-                        <i class="el-icon-s-tools"></i>
+                        <i class="el-icon-s-management"></i>
                         <span>博客</span>
                     </div>
                 </li>
@@ -42,7 +42,7 @@
                 </li>
                  <li class="d">
                       <div class="item">
-                        <i class="el-icon-s-tools"></i>
+                        <i class="el-icon-edit-outline"></i>
                         <span>写点啥</span>
                     </div>
                 </li>
@@ -50,21 +50,21 @@
                 
                  <li class="d">
                       <div class="item">
-                        <i class="el-icon-s-tools"></i>
+                        <i class="el-icon-user-solid"></i>
                         <span>个人中心</span>
                     </div>
                 </li>
                 
                  <li class="d">
                       <div class="item">
-                        <i class="el-icon-s-tools"></i>
+                        <i class="el-icon-s-platform"></i>
                         <span>后台管理</span>
                     </div>
                 </li>
 
                  <li class="d">
                       <div class="item">
-                        <i class="el-icon-s-tools"></i>
+                        <i class="el-icon-s-help"></i>
                         <span>关于站长</span>
                     </div>
                 </li>

@@ -1,15 +1,15 @@
 <template>
-    <div class="container">
-        <div class="bar">
+    <div class="container" :style="style">
+        <div class="bar" :style="color">
             <ul>
                 <li class="a" @click="openMenu">
-                   <i class="el-icon-s-fold"></i>
+                   <i class="el-icon-s-fold" :style="color"></i>
                 </li >
                 <li class="b">
                    YEDONG
                 </li>
                 <li class="c" @click="goLogin">
-                   <i class="el-icon-s-custom"></i>登录
+                   <i class="el-icon-s-custom" :style="color"></i>登录
                 </li>
             </ul>
         </div>
@@ -40,10 +40,10 @@
                         <span>设置</span>
                     </div>
                 </li>
-                 <li class="d">
+                 <li class="d" @click="writeTalking">
                       <div class="item">
                         <i class="el-icon-edit-outline"></i>
-                        <span>写点啥</span>
+                        <span>写说说</span>
                     </div>
                 </li>
                 
@@ -86,7 +86,16 @@ export default {
             isOpen: false, 
         }
     },
+    props:{
+        style: String,
+        color: String,
+    },
     methods:{
+        writeTalking(){
+            this.$router.push({
+                path:'/mobile/writeBlog'
+            })
+        },
         openMenu(){
             this.isOpen = true
         },
@@ -114,14 +123,20 @@ export default {
 
 .container{
     position: fixed;
-   background-image: linear-gradient(141deg,#9fb8ad 0%,#1fc8db 51%,#2cb5e8 75%);
+    /* background-image: linear-gradient(141deg,#9fb8ad 0%,#1fc8db 51%,#2cb5e8 75%); */
     width: 100%;
     top: 0;
     z-index: 3;
+    /* box-shadow: 5px 5px 5px #888888; */
 }
 
 .bar{
     width: 100%;
+    color: #39c5d2;
+}
+
+.bar i{
+    color: #39c5d2;
 }
 
 ul li{

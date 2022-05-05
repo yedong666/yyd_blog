@@ -16,6 +16,10 @@ const router = new Router({
           component: () => import('../mobile/components/MobileBlog.vue'),
         },
         {
+          path: 'writeBlog',
+          component: () => import('../mobile/components/MobileWriteTalking.vue'),
+        },
+        {
           path: '',
           component: () => import('../mobile/components/MobileBlogList.vue'),
         },

@@ -36,8 +36,8 @@ export default {
 .container{
     display: flex;
     flex-direction: column;
+    height: 15vh;
     width: 100%;
-    height: 40vh;
     padding: 0;
     margin-top: 1vh;
     margin-bottom: 1vh;

@@ -27,7 +27,7 @@ export default {
 @media screen and (min-width: 800px){
    body{
   /**/
-  background: url('./assets/gif-bg1.gif');
+  background-image: linear-gradient(141deg,rgb(212, 217, 207) 0%,rgb(19, 176, 203) 51%,#b579cb 75%);
   background-repeat: no-repeat;
   background-size: cover;
 }

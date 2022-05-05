@@ -24,7 +24,7 @@
          {{article.summarize}}
         </p>
         <div class="data">
-             <el-button :type="typeOfThumb" icon="el-icon-thumb" plain @click="clickThumb">{{article.numberOfLike}}</el-button>
+            <el-button :type="typeOfThumb" icon="el-icon-thumb" plain @click="clickThumb">{{article.numberOfLike}}</el-button>
             <el-button type="info" icon="el-icon-view" plain>{{article.numberOfView}}</el-button>
             <el-button type="info" icon="el-icon-chat-dot-square" plain>{{article.numberOfComment}}</el-button>
             <el-button class="read" :type="infoOfRead" icon="el-icon-reading" plain @click="readArticle">阅读全文</el-button>
@@ -77,14 +77,12 @@ li{
     width: 90%;
     margin: auto;
     margin-top: 2vh;
-    margin-bottom: 2vh;
+    margin-bottom: 4vh;
     overflow: hidden;
     box-shadow: 5px 5px 5px #888888;
     border: 5px solid #f3f4f7;
     background: #f3f4f7;
     border-radius: 10px;
-
-
 }
 
 .top{
@@ -153,10 +151,14 @@ li{
 }
 
 .bottom{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
     padding: 5px;
     color: #4d4f53;
     text-align: left;
     text-indent:4vw;
+    min-height: 15vh;
 }
 
 .bottom p{
@@ -165,12 +167,12 @@ li{
    text-overflow: ellipsis;
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 6;  
+  -webkit-line-clamp: 4;  
 }
 
 .bottom .data{
     display: flex;
-    margin-top: 10px;
+    margin-top: auto
 }
 
 .read{

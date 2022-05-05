@@ -106,8 +106,8 @@ export default {
 
   .blogCardContainer .el-header, .el-footer {
     border-radius: 0 15px 0 0;
-    background-color: #E9EEF3;
-    border: 1px solid rgb(83, 53, 53);
+    background-color: white;
+    border: 1px solid #f0f2f7;
     color: #333;
     text-align: center;
     line-height: 60px;
@@ -126,8 +126,8 @@ export default {
   .blogCardContainer .el-aside {
     position: relative;
     border-radius: 15px 0 0 15px;
-    background-color: #E9EEF3;
-    border: 1px solid gray;
+    background-color: white;
+    border: 1px solid #f0f2f7;
     border-right: 0;
     color: #333;
     text-align: center;
@@ -137,11 +137,11 @@ export default {
 }
   
  .blogCardContainer .el-main {
-    background-color: #E9EEF3;
+    background-color: white;
     color: #333;
     text-align: left;
-    border-right: 1px solid gray;
-    border-left: 1px solid gray;
+    border-right: 1px solid rgb(143, 167, 182);
+    border-left: 1px solid #f0f2f7;
     line-height: 30px;
     height: 180px;
 }
@@ -152,7 +152,7 @@ export default {
 
   .blogCardContainer .el-image{
     border-radius: 10px;
-    width: 180px;
+    width: 96%;
     height: 250px;
     margin: 10px auto;
   }

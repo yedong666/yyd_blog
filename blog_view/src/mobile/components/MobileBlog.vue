@@ -9,8 +9,7 @@
         <el-tag type="info" style="left: 144px">{{ article.tags[2] }}</el-tag>
       </div>
     </div>
-    <div class="articleContent" v-html="article.content">
-      {{ article.content }}
+    <div class="articleContent" v-html="article.content" v-highlight>
     </div>
     <div class="articleFooter">
       <div class="articleMessages">
@@ -35,6 +34,12 @@
           >确认发表</el-button
         >
       </div>
+        <div  class="nullMsg" v-if="comments.length == 0">
+                <img src="../../assets/noComments.png" alt="">
+                <span>
+                  还没有人对本文发表过评论哦
+                </span>
+              </div>
       <div class="comments" v-if="comments">
         <div class="comment" v-for="(comment, i) in comments" :key="i">
           <div class="commenter">
@@ -208,10 +213,13 @@ export default {
 .articleContent {
   font-size: 20px;
   text-align: left;
-  text-indent: 50px;
   letter-spacing: 5px;
   line-height: 150%;
   padding-bottom: 10px;
+}
+
+.articleContent img{
+  margin: auto;
 }
 
 .articleContent p {
@@ -287,4 +295,23 @@ label {
 .writeComment .el-input {
   line-height: 80px;
 }
+
+.nullMsg{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 220px;
+}
+
+.nullMsg img{
+  margin: 0 auto;
+  width: 100px;
+  height: 100px;
+  margin-top: 50px;
+}
+
+.nullMsg span{
+  color: #8590a6;
+}
+
 </style>

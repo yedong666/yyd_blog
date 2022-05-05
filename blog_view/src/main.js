@@ -20,6 +20,8 @@ Vue.directive('highlight', function(el){
   blocks.forEach((block)=>{
     console.log(block)
     block.style.background = '#f5f2f0'
+    block.style.margin = 'auto 1vw'
+    block.style.borderRadius= '10px' 
     hljs.highlightBlock(block)
   })
 })

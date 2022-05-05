@@ -17,7 +17,6 @@ export default {
     },
      mounted(){
         let that = this
-        alert("sd")
          getAllArticlesFromBack().then(response=>{
              that.articles =  response.data.data
              this.$store.commit('saveArticles', that.articles)

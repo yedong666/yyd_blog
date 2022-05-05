@@ -13,24 +13,17 @@
         class="el-menu-nav"
         mode="horizontal"
         @select="handleSelect"
-        background-color="#b2cce1"
+        background-color="#b8ddf7"
         text-color="black"
         active-text-color="#ffd04b"
       >
         <el-menu-item @click="jumpToHome" style="font-size: 25px">首页</el-menu-item>
-        <el-submenu index="2">
-          <template slot="title"><p style="font-size: 25px" @click="jumpToArticle">博客</p></template>
-          <el-menu-item index="2-1">生活分享</el-menu-item>
-          <el-menu-item index="2-2">文艺创作</el-menu-item>
-          <el-submenu index="2-3">
-            <template slot="title"><p style="font-size: 20px">技术分享</p></template>
-            <el-menu-item index="2-3-1" style="font-size: 15px">Java</el-menu-item>
-            <el-menu-item index="2-3-2" style="font-size: 15px">前端</el-menu-item>
-            <el-menu-item index="2-3-3" style="font-size: 15px">算法</el-menu-item>
-          </el-submenu>
-        </el-submenu>
+        <el-menu-item style="font-size: 25px">博客</el-menu-item>
         <el-menu-item index="3" disabled>消息中心</el-menu-item>
-        <el-menu-item index="4" @click="jumpToWrite" style="font-size: 25px">写点啥</el-menu-item>
+        <el-menu-item style="font-size: 25px">书架</el-menu-item>
+        <el-menu-item style="font-size: 25px">音乐吧</el-menu-item>
+        <el-menu-item style="font-size: 25px">影视区</el-menu-item>
+        <el-menu-item index="4" @click="jumpToWrite" style="font-size: 25px">写博客</el-menu-item>
         <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">后台管理</a></el-menu-item>
       </el-menu>
     </div>
@@ -121,9 +114,10 @@ export default {
 
 <style scoped>
 .nav {
+  position: relative;
   width: 100%;
   height: 100%;
-  background: #b2cce1;
+  background: #b8ddf7;
   /* opacity: 90%; */
 }
 
@@ -138,7 +132,7 @@ export default {
 
 .nav .menuContainer {
   position: absolute;
-  left: 250px;
+  left: 190px;
   overflow: hidden;
 }
 

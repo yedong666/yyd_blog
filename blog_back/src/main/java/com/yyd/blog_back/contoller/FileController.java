@@ -2,6 +2,7 @@ package com.yyd.blog_back.contoller;
 
 import com.yyd.blog_back.common.Result;
 import com.yyd.blog_back.common.util.PrintfMessage;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -14,6 +15,9 @@ import java.io.IOException;
 @RestController
 public class FileController {
 
+    @Value("${coverImgFilePath}")
+    private String coverImgFilePath;
+
     @RequestMapping(value = "uploadCoverImg", method = RequestMethod.POST)
     public Result uploadCoverImg(@RequestParam("file") MultipartFile file){
         PrintfMessage.logRequest("uploadCoverImg");
@@ -22,7 +26,8 @@ public class FileController {
         }
 
         String fileName = file.getOriginalFilename();
-        String filePath = "C:\\Users\\lee\\Desktop\\myblog\\blog_back\\src\\main\\resources\\static\\imgs\\articleCoverImg\\";
+        String path = "C:\\Users\\lee\\Desktop\\myblog\\blog_back\\src\\main\\resources\\static\\imgs\\articleCoverImg\\";
+        String filePath = this.coverImgFilePath;
         File dest = new File(filePath + fileName);
         try {
             file.transferTo(dest);

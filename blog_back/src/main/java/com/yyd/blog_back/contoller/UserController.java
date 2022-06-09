@@ -42,12 +42,13 @@ public class UserController {
     }
 
     @RequestMapping(value = "logout", method = RequestMethod.POST, produces = "application/json")
-    private Result logout(@RequestBody User userData){
+    private Result logout(){
         PrintfMessage.logRequest("logout");
-        if (userData.getStatus() == 0){
-            return Result.success("允许退出");
-        }
-        return Result.error();
+        return Result.success("允许退出");
+//        if (userData.getStatus() == 0){
+//
+//        }
+//        return Result.error();
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST, produces = "application/json")

@@ -19,7 +19,7 @@ export default {
         let that = this
          getAllArticlesFromBack().then(response=>{
              that.articles =  response.data.data
-             this.$store.commit('saveArticles', that.articles)
+             this.$store.commit('SAVE_ARTICLES', that.articles)
          }).catch(error => { 
           console.log(error)
         })

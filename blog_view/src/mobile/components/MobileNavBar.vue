@@ -1,15 +1,15 @@
 <template>
-    <div class="container" :style="style">
-        <div class="bar" :style="color">
+    <div class="container" :style="navStyle">
+        <div class="bar" :style="navColor">
             <ul>
                 <li class="a" @click="openMenu">
-                   <i class="el-icon-s-fold" :style="color"></i>
+                   <i class="el-icon-s-fold" :style="navColor"></i>
                 </li >
                 <li class="b">
                    YEDONG
                 </li>
                 <li class="c" @click="goLogin">
-                   <i class="el-icon-s-custom" :style="color"></i>登录
+                   <i class="el-icon-s-custom" :style="navColor"></i>{{user.nickName}}
                 </li>
             </ul>
         </div>
@@ -22,7 +22,7 @@
                         </el-input>
                     </div>
                 </li>
-                 <li class="b">
+                 <li class="b" @click="goMobileHome">
                       <div class="item">
                         <i class="el-icon-s-home"></i>
                         <span>主页</span>
@@ -68,6 +68,12 @@
                         <span>关于站长</span>
                     </div>
                 </li>
+                 <li class="d" @click="logout">
+                      <div class="item">
+                        <i class="el-icon-right"></i>
+                        <span>退出账号</span>
+                    </div>
+                </li>
                  <li class="d" @click="closeMenu">
                       <div class="final_item">
                         <i class="el-icon-arrow-up"></i>
@@ -79,25 +85,50 @@
 </template>
 
 <script>
+import {getUserData} from '@/request/token'
 export default {
     name: 'MobileNavBarVue',
     data(){
         return{
-            isOpen: false, 
+            isOpen: false,
+            user:{
+                nickName:'登录',
+                avter: '',
+            }, 
+        }
+    },
+    mounted(){  
+        if (getUserData() != null){
+            this.user.nickName = JSON.parse(getUserData()).nickname
         }
     },
     props:{
-        style: String,
-        color: String,
+        navStyle: {},
+        navColor: {},
     },
     methods:{
+        goMobileHome(){
+           
+            this.$router.push({
+                path:'/mobile'
+            })
+             this.closeMenu()
+        },
+        logout(){
+            this.$store.dispatch('logout', null).then(()=>{
+                location.reload()
+            })
+        } ,
         writeTalking(){
+            
             this.$router.push({
                 path:'/mobile/writeBlog'
             })
+             this.closeMenu()
         },
         openMenu(){
             this.isOpen = true
+            this.$emit('changeStyle', "da")
         },
         closeMenu(){
             this.isOpen = false
@@ -107,7 +138,6 @@ export default {
                 path: '/login',
             })
         }
-
     }
 
 }
@@ -120,6 +150,7 @@ export default {
     margin: 0;
     border: 0;
 }
+
 
 .container{
     position: fixed;

@@ -24,7 +24,9 @@
 export default {
     name: 'MobileFooter',
     data(){
-
+        return{
+            
+        }
     },
     methods:{
 

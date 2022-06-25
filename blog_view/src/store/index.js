@@ -31,6 +31,7 @@ export default new Vuex.Store({
         loginToBack(user.account, user.password).then(response => {
           commit('SET_USER', response.data.data)
           //存储用户信息至浏览器缓存
+          console.log(response.data)
           setUserData(response.data.data)
           resolve()
         }).catch(error => { 

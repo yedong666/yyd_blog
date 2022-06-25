@@ -38,7 +38,7 @@ export default {
     .backgroundContainer h1{  
       line-height: 100px;
        font-size: 40px;
-            background-image: linear-gradient(135deg,rgb(0, 195, 255),rgb(176, 176, 202));
+            background-image: linear-gradient(135deg,rgb(0, 195, 255),#e4002b);
             background-clip:text;
             -webkit-background-clip:text;
             color: transparent;

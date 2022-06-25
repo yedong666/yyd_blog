@@ -33,27 +33,27 @@ public class UserService {
     }
 
     public User login(String account, String password){
-        //获取Authentication接口实现类对象实例
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(account,password);
-        Authentication authentication = authenticationManager.authenticate(authenticationToken);
-
-        if (Objects.isNull(authentication)){
-            throw new RuntimeException("登录失败");
-        }
-
-        //认证成功则生成JWT存入ResponseResult
-        String jwtStr = JWTUtil.createToken(account, "user", true);
-
-        //将用户完整信息存入Redis
-        redisTemplate.opsForValue().set(account, authentication);
-
-//        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
-//        queryWrapper.eq("account", account);
-//        User user = userMapper.selectOne(queryWrapper);
-//        if (!user.getPassword().equals(password)){
-//            return null;
+//        //获取Authentication接口实现类对象实例
+//        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(account,password);
+//        Authentication authentication = authenticationManager.authenticate(authenticationToken);
+//
+//        if (Objects.isNull(authentication)){
+//            throw new RuntimeException("登录失败");
 //        }
-        return null;
+
+//        //认证成功则生成JWT存入ResponseResult
+//        String jwtStr = JWTUtil.createToken(account, "user", true);
+
+//        //将用户完整信息存入Redis
+//        redisTemplate.opsForValue().set(account, authentication);
+
+        QueryWrapper<User> queryWrapper = new QueryWrapper<>();
+        queryWrapper.eq("account", account);
+        User user = userMapper.selectOne(queryWrapper);
+        if (!user.getPassword().equals(password)){
+            return null;
+        }
+        return user;
     }
 
     public User register(User newUser){

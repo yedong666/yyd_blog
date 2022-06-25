@@ -79,6 +79,7 @@ export default {
           that.$store
             .dispatch('login', userData)
             .then(() => {
+              alert("dada")
               that.$router.push({
                 path: '/',
               })

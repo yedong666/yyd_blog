@@ -163,12 +163,12 @@ export default {
       if (this.comment.length == 0){
         alert("评论不可以为空哦")
       }else{
-        if (this.$store.state.userData == null){
+        if (this.$store.state.user == null){
           alert("需要登录后才可以评论")
         }else{
           let comment = {
             content: this.comment,
-            observerId: JSON.parse(this.$store.state.userData).id,
+            observerId: this.$store.state.user.id,
             articleId: this.id,
             //评论的replyId属性都为0
             replyId: 0,

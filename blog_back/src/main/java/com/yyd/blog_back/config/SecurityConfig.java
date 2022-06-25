@@ -43,9 +43,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.cors().and().csrf().disable()
                 .authorizeRequests()
                 //对于登录注册接口放行
-                .antMatchers("/login", "/register").anonymous()
+                .antMatchers("**").anonymous()
                 // 其他都需要认证
-                .anyRequest().authenticated()
+//                .anyRequest().authenticated()
                 .and()
 //                .addFilter(new JWTAuthenticationFilter(authenticationManager()))
 //                .addFilter(new JWTAuthorizationFilter(authenticationManager()))

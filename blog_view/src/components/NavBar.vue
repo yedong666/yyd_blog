@@ -17,14 +17,10 @@
         text-color="black"
         active-text-color="#ffd04b"
       >
-        <el-menu-item @click="jumpToHome" style="font-size: 25px">首页</el-menu-item>
-        <el-menu-item style="font-size: 25px">博客</el-menu-item>
-        <el-menu-item index="3" disabled>消息中心</el-menu-item>
-        <el-menu-item style="font-size: 25px">书架</el-menu-item>
-        <el-menu-item style="font-size: 25px">音乐吧</el-menu-item>
-        <el-menu-item style="font-size: 25px">影视区</el-menu-item>
-        <el-menu-item index="4" @click="jumpToWrite" style="font-size: 25px">写博客</el-menu-item>
-        <el-menu-item index="5"><a href="https://www.ele.me" target="_blank">后台管理</a></el-menu-item>
+        <el-menu-item @click="jumpTo('/home')" style="font-size: 25px">首页</el-menu-item>
+        <el-menu-item style="font-size: 25px" @click="jumpTo('/home/blogclassify')">博客分类</el-menu-item>
+        <el-menu-item index="4" style="font-size: 25px" @click="jumpTo('/blogwrite')">写博客</el-menu-item>
+        <el-menu-item index="5" @click="jumpTo('/home/about')">关于博主</el-menu-item>
       </el-menu>
     </div>
 
@@ -55,6 +51,7 @@ export default {
     if (getUserData() != null) {
       console.log(JSON.parse(getUserData()))
       this.user = JSON.parse(getUserData())
+      this.$store.commit('SET_USER', this.user)
       this.userMessage = this.user.nickname
       this.changeLogoutStyle()
     }
@@ -77,6 +74,12 @@ export default {
         .catch((error) => {
           alert(error)
         })
+    },
+
+    jumpTo(path){
+      this.$router.push({
+        path: path,
+      })
     },
 
     jumpToLogin() {

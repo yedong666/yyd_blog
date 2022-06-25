@@ -53,9 +53,24 @@ const router = new Router({
     },
 
     {
-      path: '',
-      name: 'Home',
+      path: '/home',
       component: () => import('../views/Home.vue'),
+      redirect: '/home/bloglist',
+      children: [
+        {
+          path: 'bloglist',
+          component: () => import('../views/blog/BlogShow.vue')
+        },
+        {
+          path: 'blogclassify',
+          component: () => import('../components/Classify.vue'),
+        },
+        {
+          path: 'about',
+          component: () => import('../components/About.vue'),
+        },
+      ],
+      
     },
     {
       path: '/blogShow',

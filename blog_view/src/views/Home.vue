@@ -7,7 +7,7 @@
       </el-container>
       <el-container class="main">
         <el-aside width="11%"  v-if = "isShow"><UserMenuBar @closeMenu="showUserMenuBar"></UserMenuBar></el-aside>
-        <el-main ><BlogShow></BlogShow></el-main>
+        <el-main ><router-view></router-view></el-main>
         <el-aside width="29%" v-if="flag"><MeShow></MeShow> <SortBar></SortBar></el-aside>
       </el-container>
       <el-footer height="50px"><FootBar></FootBar></el-footer>
@@ -20,7 +20,7 @@
 <script>
 import Background from '@/components/Background.vue'
 import NavBar from '@/components/NavBar.vue'
-import BlogShow from '@/views/blog/BlogShow.vue'
+// import BlogShow from '@/views/blog/BlogShow.vue'
 import MeShow from '@/components/MeShow.vue'
 import SortBar from '@/components/SortBar.vue'
 import FootBar from '@/components/FootBar.vue'
@@ -61,7 +61,7 @@ export default {
   components: {
     Background,
     NavBar,
-    BlogShow,
+    // BlogShow,
     MeShow,
     SortBar,
     FootBar,

@@ -19,12 +19,7 @@
             <i class="el-icon-location"></i>
           <span>个人中心</span>
        </el-menu-item>
-         
-      
-      <el-menu-item index="4">
-        <i class="el-icon-document"></i>
-        <span slot="title">后台管理</span>
-      </el-menu-item>
+        
       <el-menu-item index="5" @click="closeMenu">
         <i class="el-icon-document"></i>
         <span slot="title">收起菜单</span>

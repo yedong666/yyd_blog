@@ -3,7 +3,7 @@ drop table  if exists yyd_blog.user;
 CREATE TABLE `yyd_blog`.`user` (
                                    `id` INT NOT NULL AUTO_INCREMENT,
                                    `account` VARCHAR(12) NULL,
-                                   `password` VARCHAR(12) NULL,
+                                   `password` VARCHAR(100) NULL,
                                    `nickname` VARCHAR(12) NULL,
                                    `phoneNumber` VARCHAR(11) NULL,
                                    `email` VARCHAR(20) NULL,
@@ -59,6 +59,14 @@ CREATE TABLE `yyd_blog`.`comments` (
                                        `numberOfReply` int NULL,
                                        `numberOfView` int NULL,
 
+                                       PRIMARY KEY (`id`))
+    ENGINE = InnoDB
+DEFAULT CHARACTER SET = utf8;
+
+drop table  if exists yyd_blog.userRole;
+CREATE TABLE `yyd_blog`.`userRole` (
+                                       `id` INT NOT NULL AUTO_INCREMENT,
+                                       `name` varchar(100) not null,
                                        PRIMARY KEY (`id`))
     ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;

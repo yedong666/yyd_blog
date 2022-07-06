@@ -53,6 +53,11 @@ const router = new Router({
     },
 
     {
+      path: '/',
+      redirect: '/home',
+    },
+
+    {
       path: '/home',
       component: () => import('../views/Home.vue'),
       redirect: '/home/bloglist',

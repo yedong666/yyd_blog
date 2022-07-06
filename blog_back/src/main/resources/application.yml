@@ -48,3 +48,12 @@ spring:
   devtools:
     restart:
       additional-paths: src/main/resource/static/
+  jwt:
+    ###过期时间 s数432000 5天
+    time: 432000
+    ###安全密钥
+    secret: "BlogSecret"
+    ###token前缀
+    prefix: "Bearer "
+    ###http头key
+    header: "Authorization"

@@ -6,6 +6,7 @@ import com.yyd.blog_back.entity.Article;
 import com.yyd.blog_back.service.ArticleService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -19,6 +20,7 @@ public class ArticleController {
     private ArticleService articleService;
 
     @RequestMapping("articles")
+    @PreAuthorize("hasAuthority('VISITOR')")
     public Result getAllArticles(){
         List<Article> articles = articleService.getAllArticles();
         if (articles.size() == 0){
@@ -28,6 +30,7 @@ public class ArticleController {
     }
 
     @RequestMapping("getArticleById")
+    @PreAuthorize("hasAuthority('VISITOR')")
     public Result getArticleById(@Param("id") Integer id){
         Article article = articleService.getArticleById(id);
         System.out.println(id);
@@ -38,6 +41,7 @@ public class ArticleController {
     }
 
     @RequestMapping("getArticlesByAuthor")
+    @PreAuthorize("hasAuthority('VISITOR')")
     public Result getArticlesByAuthor(@Param("author") String author){
         List<Article> articles = articleService.getArticlesByAuthor(author);
         if (articles.size() == 0){
@@ -47,6 +51,7 @@ public class ArticleController {
     }
 
     @RequestMapping(value = "addArticle", method = RequestMethod.POST, produces = "application/json")
+    @PreAuthorize("hasAuthority('USER')")
     public Result addArticle(@RequestBody Article article){
         PrintfMessage.logRequest("addArticle");
         if (!articleService.addArticle(article)){

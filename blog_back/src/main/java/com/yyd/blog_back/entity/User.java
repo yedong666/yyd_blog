@@ -33,6 +33,10 @@ public class User implements Serializable {
     @TableField("phoneNumber")
     private String phoneNumber;
 
+    @JsonProperty(value = "rolesId")
+    @TableField("rolesId")
+    private String rolesId; //用户权限，用逗号分割
+
     @JsonProperty(value = "email")
     @TableField("email")
     private String email;

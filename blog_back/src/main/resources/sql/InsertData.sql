@@ -1,9 +1,8 @@
-insert into yyd_blog.user(id, account, password, nickname,phoneNumber ,email ,status)
+insert into yyd_blog.user(id, account, password, nickname,phoneNumber ,rolesId, email ,status)
 values
-    (1, '20223020', '12345678', 'admin','12365478976','admin@github.com', 1),
-    (2, '20223021', '12345678', 'tom','18767543451','tom@163.com', 0),
-    (3, '20223020', '12345678', 'Jack','15627899083','jack@qq.com', 0);
-
+    (1, '20223020', '$2a$10$OoUsMs00x8zxF3vEm3PawOFBLnCPWWBie.ZHMYDvFgytNFL8AsRtu', 'admin','12365478976', "1, 2, 3",'admin@github.com', 1),
+    (2, '20223021', '$2a$10$OoUsMs00x8zxF3vEm3PawOFBLnCPWWBie.ZHMYDvFgytNFL8AsRtu', 'tom','18767543451',"1, 2", 'tom@163.com', 0),
+    (3, '20223022', '$2a$10$OoUsMs00x8zxF3vEm3PawOFBLnCPWWBie.ZHMYDvFgytNFL8AsRtu', 'Jack','15627899083',"1", 'jack@qq.com', 0);
 
 insert into yyd_blog.article(id, title, content, summarize, author, coverImage, type, tags, numberOfComment, numberOfLike, numberOfView, isView, isPublicCommentArea, isAllowedTurn)
 values

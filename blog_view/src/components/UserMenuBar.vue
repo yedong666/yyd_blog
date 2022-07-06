@@ -31,7 +31,7 @@
 
 <script>
 // import {removeToken} from '@/request/token'
-
+import { getUserData } from '@/request/token.js'
 export default {
     name: 'UserMenuBar',
     data(){
@@ -46,7 +46,12 @@ export default {
 
         logout(){
           alert("确定退出吗")
-          this.$store.dispatch('logout', this.$store.state.userData).then(()=>{
+          let state = {}
+          if (getUserData() != null) {
+            console.log(JSON.parse(getUserData()))
+            state = getUserData()
+          }
+          this.$store.dispatch('logout', state).then(()=>{
             location.reload();
           })  
         }

@@ -3,6 +3,14 @@ export function getUserData() {
     return localStorage.user
 }
 
+export function getToken() {
+    return localStorage.token
+}
+
+export function setToken(token) {
+    return localStorage.token = token
+}
+
 //向浏览器缓存中存入token数据(登录)
 export function setUserData(user) {
 

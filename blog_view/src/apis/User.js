@@ -9,6 +9,9 @@ export function loginToBack(account, password) {
     return request({
       url: '/login',
       method: 'post',
+      headers: {
+        'Content-Type': 'application/json'
+      },
       params: data,
     })
 }
@@ -46,6 +49,6 @@ export function logoutFromBack(state){
     headers: {
       'Content-Type': 'application/json'
     },
-    data: state,
+    data:state,
   })
 }

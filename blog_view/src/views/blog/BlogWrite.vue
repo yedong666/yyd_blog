@@ -1,6 +1,6 @@
 <template>
   <div class="blogWriteContainer">
-    <div class="shadow" id="shadow">
+    <div class="shadow" id="shadow" :style="heightStyle">
       <div class="formCard">
         <el-form :model="article" :rules="rules" ref="article" label-width="130px" class="article">
           <el-form-item label="文章概述" prop="summary">
@@ -19,22 +19,28 @@
             </el-radio-group>
           </el-form-item>
           <el-form-item label="选择标签" prop="tags">
-            <el-checkbox-group v-model="article.tags">
-              <el-checkbox label="知识总结" name="type"></el-checkbox>
-              <el-checkbox label="生活随笔" name="type"></el-checkbox>
-              <el-checkbox label="技术分享" name="type"></el-checkbox>
-              <el-checkbox label="项目讨论" name="type"></el-checkbox>
-            </el-checkbox-group>
+            <div>
+                 <el-button v-for="(tag, i) in article.tags" :type="getType(i)" :key="i" plain>{{tag}}</el-button>
+                 <el-button type="primary" icon="el-icon-plus" @click="controlTagMenu" style="margin-top:10px">{{isOpen ? '收起标签栏' : '添加标签'}}</el-button>
+            </div>
+            <div v-if="isOpen" style="height: 200px;" class="tagCon">
+                <div v-for="(tags, index) in allTags" :key="index">
+                  <p style="text-align:left"><b>{{tags.classify}}:</b></p>
+                  <el-checkbox-group v-model="article.tags" size="small"  max="3">
+                    <el-checkbox  v-for="(tag, i) in tags.tagList" :key="i" :label="tag.name" border ></el-checkbox>
+                  </el-checkbox-group>
+               </div>
+            </div>
           </el-form-item>
           <el-form-item label="添加文章封面" prop="resource">
             <el-upload
               class="avatar-uploader"
-              action="http://localhost:8888/uploadCoverImg"
+              :action="requestPath"
               :show-file-list="true"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload"
             >
-              <img v-if="article.coverImage" :src="article.coverImage" class="avatar" />
+              <img v-if="article.coverImage" :src="this.$server.path + article.coverImage" class="avatar" />
               <span v-else style="border: 1px solid black">
                 <i class="el-icon-plus avatar-uploader-icon"></i>
               </span>
@@ -80,16 +86,15 @@
             style="margin-top: 10px; width: 60%; margin-bottom: 0px"
           ></el-input>
         </el-header>
-        <el-main style="margin-top: 10px; padding: 0; margin-bottom: 5px">
-          <el-card id="writeContainer">
-            <div id="toolbar-container"></div>
-            <div id="editor-container"></div>
+        <div id="toolbar-container" style="padding: 0; margin: 10px 1% 0px 1%; width: 98%; "></div>
+        <el-main style="padding: 0; margin: 0px 1% 10px 1%; width: 98%;">
+          <el-card id="writeContainer" style="min-height: 840px; ">
+            <div id="editor-container" ></div>
           </el-card>
-          <el-card>
-            <div id="textShow" v-html="article.content"  style="height: 100%" v-highlight>
+           <el-card id="textShow" v-html="article.content"  style="min-height: 840px; " v-highlight>
               
-            </div>
-          </el-card>
+           </el-card>
+           
         </el-main>
         <el-footer style="background: white; margin: auto; width: 98%; margin-bottom: 10px; padding: 0" height="40px">
           <el-button type="primary" style="width: 100%" @click="showForm">发布</el-button>
@@ -109,15 +114,20 @@ import '@wangeditor/editor/dist/css/style.css'
 import { createEditor, createToolbar} from '@wangeditor/editor'
 import { addArticleToBack } from '@/apis/articles.js'
 import { getUserData } from '@/request/token.js'
+import { getTagsByClassify } from '@/apis/tags'
 
 // import $ from 'jquery'
 
 export default {
   data() {
     return {
+      requestPath: this.$server.path + "/uploadCoverImg",
+      heightStyle: "height: " + document.body.scrollHeight + "px",
+      isOpen: false,
       user: {},
       imageUrl: '',
       input: '',
+      allTags:[],
       article: {
         title: '',
         content: '',
@@ -146,9 +156,16 @@ export default {
   },
 
   mounted() {
+
+     let that = this
+    getTagsByClassify().then((response) => {
+      console.log(response.data.data)
+      that.allTags = response.data.data
+    })
+
+
     const editorConfig  = {}
     editorConfig.placeholder = '请输入内容'
-    const that = this
     editorConfig.onChange = (editor) => {
       // 当编辑器选区、内容变化时，即触发
     // const content = editor.children
@@ -184,7 +201,7 @@ export default {
     submitForm(formName) {
       let that = this
       this.$refs[formName].validate((valid) => {
-        if (valid) {
+        if (valid && getUserData() != null) {
           alert('submit!')
           that.readyPublish()
           console.log(that.article)
@@ -199,6 +216,7 @@ export default {
       })
     },
     resetForm(formName) {
+      this.article.coverImage = null
       this.$refs[formName].resetFields()
     },
     handleAvatarSuccess(res) {
@@ -222,6 +240,7 @@ export default {
     showForm() {
       document.getElementById('shadow').style.display = 'block'
       document.getElementById('contant').style.opacity = '0.6'
+      this.heightStyle = "height: " + document.body.scrollHeight + "px"
     },
 
     cancelPublish() {
@@ -233,6 +252,17 @@ export default {
       this.article.author = JSON.parse(getUserData()).id
       this.article.tags = this.article.tags.toString()
     },
+
+    controlTagMenu(){
+      if(this.isOpen == true) this.isOpen = false
+      else this.isOpen = true
+    },
+
+    getType(i){
+      if(i == 0) return "primary"
+      else if(i == 1) return "success"
+      else return "danger"
+    }
   },
 }
 </script>
@@ -242,12 +272,24 @@ export default {
   padding: 0;
 }
 
+.el-main{
+  display: flex;
+}
+
 .el-card {
-  float: left;
-  width: 49%;
-  height: 800px;
-  margin-left: 10px;
+  margin: 0;
+  padding: 0;
+  width: 50%;
+  /* height: 800px; */
+  border-radius: 0;
   text-align: left;
+  font-size: 16px;
+}
+
+::v-deep #textShow p{
+   text-align: left;
+   font-size: 18px;
+   margin: 25px;
 }
 
 .article {
@@ -273,7 +315,7 @@ export default {
   display: none;
   background: rgba(0, 0, 0, 0.7);
   width: 100%;
-  height: 120%;
+  height: 1140px;
   z-index: 1;
 }
 
@@ -295,6 +337,35 @@ export default {
 
 #textShow{
   font-size: 20px;
+}
+
+.tagCon{
+  display: flexbox;
+  flex-wrap: wrap;
+  overflow:scroll;
+  overflow-x: hidden;
+  margin-top: 10px;
+  border: 2px solid #f0f2f7;
+  width: 100%;
+}
+
+.tagCon::-webkit-scrollbar {/*滚动条整体样式*/
+        width: 10px;     /*高宽分别对应横竖滚动条的尺寸*/
+        height: 1px;
+    }
+.tagCon::-webkit-scrollbar-thumb {/*滚动条里面小方块*/
+        border-radius: 10px;
+         -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        background: #caccd1;
+    }
+.tagCon::-webkit-scrollbar-track {/*滚动条里面轨道*/
+        -webkit-box-shadow: inset 0 0 5px rgba(0,0,0,0.2);
+        border-radius: 10px;
+        background: #EDEDED;
+    }
+
+.el-checkbox{
+  margin: 10px;
 }
 
 </style>

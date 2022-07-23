@@ -16,7 +16,7 @@ public class CommentController {
     CommentService commentService;
 
     @RequestMapping("getCommentsByArticleId")
-    @PreAuthorize("hasAuthority('VISTOR')")
+    @PreAuthorize("hasAuthority('VISITOR')")
     public Result getCommentByArticleId(@Param("articleId") Integer articleId){ 
         List<Comment> comments = commentService.getCommentByArticleId(articleId);
         return Result.success(comments);

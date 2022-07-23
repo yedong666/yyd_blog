@@ -1,12 +1,15 @@
 package com.yyd.blog_back.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.yyd.blog_back.entity.Article;
 import com.yyd.blog_back.mapper.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class ArticleService {
@@ -47,5 +50,15 @@ public class ArticleService {
             System.out.println(e);
             return false;
         }
+    }
+
+    /**
+     * 分页查询
+     * @return
+     */
+
+    public IPage<Article> getArticlesByPage(int pageNum){
+
+        return null;
     }
 }

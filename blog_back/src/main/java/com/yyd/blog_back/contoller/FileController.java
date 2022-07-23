@@ -16,11 +16,14 @@ import java.io.IOException;
 @RestController
 public class FileController {
 
-    @Value("${coverImgFilePath}")
-    private String coverImgFilePath;
+    @Value("${file.location}")
+    private String filePath;
+
+    @Value("${address}")
+    private String address;
 
     @RequestMapping(value = "uploadCoverImg", method = RequestMethod.POST)
-    @PreAuthorize("hasAuthority('USER')")
+    @PreAuthorize("hasAuthority('VISITOR')")
     public Result uploadCoverImg(@RequestParam("file") MultipartFile file){
         PrintfMessage.logRequest("uploadCoverImg");
         if (file.isEmpty()) {
@@ -28,14 +31,49 @@ public class FileController {
         }
 
         String fileName = file.getOriginalFilename();
-        String path = "C:\\Users\\lee\\Desktop\\myblog\\blog_back\\src\\main\\resources\\static\\imgs\\articleCoverImg\\";
-        String filePath = this.coverImgFilePath;
-        File dest = new File(path + fileName);
+        File dest = new File(this.filePath + "imgs\\articleCoverImg\\" + fileName);
         try {
             file.transferTo(dest);
-            return Result.success("http://localhost:8888/imgs/articleCoverImg/"+fileName);
+            //返回访问路径
+            return Result.success("/imgs/articleCoverImg/" + fileName);
         } catch (IOException e) {
             return Result.error("上传失败, 请重试");
+        }
+    }
+
+    @RequestMapping(value = "uploadTagImg", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('VISITOR')")
+    public Result uploadTagImg(@RequestParam("file") MultipartFile file){
+        PrintfMessage.logRequest("uploadTagImg");
+        if (file.isEmpty()) {
+            return Result.error("上传失败，请选择文件");
+        }
+
+        String fileName = file.getOriginalFilename();
+        File dest = new File(this.filePath + fileName);
+        try {
+            file.transferTo(dest);
+            return Result.success("/imgs/tagImg/" + fileName);
+        } catch (IOException e) {
+            return Result.error("上传失败, 请重试");
+        }
+    }
+
+    @RequestMapping(value = "uploadAvatarImg", method = RequestMethod.POST)
+    @PreAuthorize("hasAuthority('VISITOR')")
+    public Result uploadAvatarImg(@RequestParam("file") MultipartFile file){
+        PrintfMessage.logRequest("uploadAvatarImg");
+        if (file.isEmpty()) {
+            return Result.error("上传失败，请选择文件");
+        }
+
+        String fileName = file.getOriginalFilename();
+        File dest = new File(this.filePath + fileName);
+        try {
+            file.transferTo(dest);
+            return Result.success("imgs/avatarImg/" + fileName);
+        } catch (IOException e) {
+            return Result.error("/上传失败, 请重试");
         }
     }
 }

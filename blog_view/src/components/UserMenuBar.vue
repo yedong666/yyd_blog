@@ -64,12 +64,11 @@ export default {
 
 <style scoped>
 .UserMenuBarContainer{
-    margin-top: 20px;
-    width: 120px;
+  margin-top: 20px;
 }
 .el-menu{
     width:140px;
-    margin-left: 15px;
+    margin:auto;
 }
 
 

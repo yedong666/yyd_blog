@@ -1,4 +1,6 @@
-coverImgFilePath: /root/blog_files/imgs
+address: http://localhost:8888/
+file:
+  location: C:\\Users\\lee\\Desktop\\myblog\\blog_back\\src\\main\\resources\\static\\
 # Tomcat
 server:
   tomcat:
@@ -10,6 +12,10 @@ server:
   #连接超时时间
   connection-timeout: 5000ms
 spring:
+  servlet:
+    multipart:
+      max-request-size: 100MB #设置总上传数据总大小
+      max-file-size: 20MB #设置单个文件最大长度
   redis:
     host: 49.234.51.235
     port: 6379
@@ -57,3 +63,7 @@ spring:
     prefix: "Bearer "
     ###http头key
     header: "Authorization"
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.yyd.blog_back.entity  #所有entity别名所在包

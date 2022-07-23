@@ -1,14 +1,14 @@
 <template>
   <div class="reginsterContainer">
     <el-form label-position="left" ref="form" :model="user" class="loginForm" :rules="rules">
-      <h2 style="margin-bottom: 10px; color: rgb(0, 195, 255">注册</h2>
+      <h2 style="margin-bottom: 10px; color: rgb(0, 195, 255)">注册</h2>
       <el-form-item prop="name">
         <el-input type="text" auto-complete="false" placeholder="昵称" v-model="user.name"></el-input>
       </el-form-item>
       <el-form-item prop="password">
         <el-input type="password" auto-complete="false" placeholder="密码" v-model="user.password"></el-input>
       </el-form-item>
-       <el-form-item prop="passwords">
+      <el-form-item prop="passwords">
         <el-input type="password" auto-complete="false" placeholder="确认密码" v-model="user.passwords"></el-input>
       </el-form-item>
       <el-form-item prop="phoneNumber">
@@ -17,13 +17,19 @@
       <el-form-item prop="email">
         <el-input type="text" auto-complete="false" placeholder="邮箱" v-model="user.email"></el-input>
       </el-form-item>
-       <el-form-item prop="code">
-        <el-input type="text" auto-complete="false" placeholder="验证码" v-model="user.code" style="width: 188px; float: left; margin-right: 10px;"></el-input>
+      <el-form-item prop="code">
+        <el-input
+          type="text"
+          auto-complete="false"
+          placeholder="验证码"
+          v-model="user.code"
+          style="width: 188px; float: left; margin-right: 10px"
+        ></el-input>
         <valid-code @listen="getCode"></valid-code>
       </el-form-item>
-       <el-button  @click="test()">test</el-button>
-     <el-tooltip class="item" effect="dark" content="注册成功后账号将发送至您的邮箱" placement="top" >
-        <el-button  @click="doReginster('form')">注册</el-button>
+      <el-button @click="test()">test</el-button>
+      <el-tooltip class="item" effect="dark" content="注册成功后账号将发送至您的邮箱" placement="top">
+        <el-button @click="doReginster('form')">注册</el-button>
       </el-tooltip>
     </el-form>
   </div>
@@ -88,8 +94,11 @@ export default {
               nickname: that.user.name,
               phoneNumber: that.user.phoneNumber,
               email: that.user.email,
+            }).then(response=>{
+                that.$message({message: "账号注册成功", type: "success", showClose: true})
+                alert("你的账号是" + response.data.data.account)
             })
-            that.$message({message: "账号注册成功", type: "success", showClose: true})
+
           } else {
             console.log('error submit!!');
             return false;
@@ -108,7 +117,7 @@ export default {
       },
 
     checkReginsterData(phonenumber, email, code){
-      if (!(/^\d+$/).test(phonenumber)){ 
+      if (!(/^\d+$/).test(phonenumber)){
         //电话号码中存在数字以外的字符
           this.$message({message: '电话号码格式错误', type: 'error', showClose: true})
           return false
@@ -133,29 +142,29 @@ export default {
 </script>
 
 <style scoped>
-.reginsterContainer{
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    margin: 0 auto;
-    background-image: url( '../assets/reginster_bg.jpg');
-    background-repeat: no-repeat;
-    background-size: cover;
+.reginsterContainer {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  margin: 0 auto;
+  background-image: url('../assets/reginster_bg.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
 }
 
-.reginsterContainer .el-input{
-    border: 1px solid rgb(182, 170, 170);
+.reginsterContainer .el-input {
+  border: 1px solid rgb(182, 170, 170);
 }
 
-.reginsterContainer el-button{
-    background: linear-gradient(to right, #facabb , );
+.reginsterContainer el-button {
+  background: linear-gradient(to right, #facabb);
 }
 
 .reginsterContainer .loginForm {
   border-radius: 15px;
   background-clip: padding-box;
-  margin: 200px auto;
+  margin: 100px auto;
   box-shadow: 0 0 10px gray;
   width: 350px;
   padding: 15px 35px 15px 35px;

@@ -34,7 +34,7 @@ public class LoginService {
     private UserRoleService userRoleService;
 
     @Autowired
-    private BCryptPasswordEncoder encoder;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Autowired
     private AuthenticationManager authenticationManager;
@@ -46,8 +46,10 @@ public class LoginService {
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         queryWrapper.eq("account", account);
         User dbUser = userMapper.selectOne(queryWrapper);
+        System.out.println(bCryptPasswordEncoder.matches(password, dbUser.getPassword()));
         //此用户不存在 或 密码错误
-        if (null == dbUser || !encoder.matches(password, dbUser.getPassword())) {
+        if (null == dbUser || !bCryptPasswordEncoder.matches(password, dbUser.getPassword())) {
+            System.out.println(password + ":" + dbUser.getPassword());
             return null;
         }
 

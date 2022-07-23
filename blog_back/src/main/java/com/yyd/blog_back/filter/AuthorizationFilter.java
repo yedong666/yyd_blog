@@ -53,6 +53,11 @@ public class AuthorizationFilter extends OncePerRequestFilter {
      */
     private void checkPermission(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
         boolean giveFlag = false;
+        String method = request.getMethod();
+        if(method.equals("OPTIONS")){
+            giveFlag = true;
+        }
+        System.out.println(request.toString());
         String authHeader = request.getHeader(jwtConfig.getHeader());
 
         if (authHeader != null && authHeader.startsWith(jwtConfig.getPrefix())) {

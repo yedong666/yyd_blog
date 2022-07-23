@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import {setUserData, removeToken, getToken, setToken} from '@/request/token'
+import {setUserData, removeUserData, removeToken, getToken, setToken} from '@/request/token'
 import {loginToBack, logoutFromBack} from '@/apis/user.js'
 
 Vue.use(Vuex);
@@ -30,6 +30,8 @@ export default new Vuex.Store({
     login({commit}, user) {
       return new Promise((resolve, reject) => {
         loginToBack(user.account, user.password).then(response => {
+          
+          console.log(response.data)
           commit('SET_USER', response.data.data["user"])
           //存储用户信息至浏览器缓存
           console.log(response.data)
@@ -50,6 +52,7 @@ export default new Vuex.Store({
           console.log(data)
           commit('SET_USER', null)
           removeToken()
+          removeUserData()
           resolve()
         }).catch(error => {
           reject(error)

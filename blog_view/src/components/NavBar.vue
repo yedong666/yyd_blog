@@ -1,7 +1,7 @@
 <template>
   <div class="nav">
     <div class="user" @mouseover="showMenu(true)">
-      <el-button style="margin: 10px; margin-left: 38px;" @click="jumpToLogin">
+      <el-button style="margin: 10px auto" @click="jumpToLogin">
         {{ userMessage }}
       </el-button>
       <!-- <el-button :style="logoutButtonStyle" @click="jumpToLogout"> 退出 </el-button> -->
@@ -17,17 +17,16 @@
         text-color="black"
         active-text-color="#ffd04b"
       >
-        <el-menu-item @click="jumpTo('/home')" style="font-size: 25px">首页</el-menu-item>
-        <el-menu-item style="font-size: 25px" @click="jumpTo('/home/blogclassify')">博客分类</el-menu-item>
-        <el-menu-item index="4" style="font-size: 25px" @click="jumpTo('/blogwrite')">写博客</el-menu-item>
-        <el-menu-item index="5" @click="jumpTo('/home/about')">关于博主</el-menu-item>
+        <el-menu-item @click="jumpTo('/home')" >首页</el-menu-item>
+        <el-menu-item  @click="jumpTo('/home/blogclassify')">博客分类</el-menu-item>
+        <el-menu-item index="4"  @click="jumpTo('/blogwrite')">写博客</el-menu-item>
+        <el-menu-item index="5"  @click="jumpTo('/manage')">后台管理</el-menu-item>
+        <el-menu-item index="6" @click="jumpTo('/home/about')">关于博主</el-menu-item>
       </el-menu>
     </div>
 
     <div class="searchBar">
-      <el-input placeholder="请输入内容" v-model="searchInput" class="input-with-select">
-          <el-button  slot="append" icon="el-icon-search"></el-button>
-          </el-input>
+      <search></search>
     </div>
     
   </div>
@@ -35,6 +34,9 @@
 
 <script>
 import { getUserData } from '@/request/token.js'
+import Search from '@/components/tool/Search.vue'
+
+
 export default {
   name: 'Navbar',
   data() {
@@ -45,6 +47,10 @@ export default {
       logoutButtonStyle: 'margin: 10px; display: none',
       user: {},
     }
+  },
+
+  components:{
+    Search,
   },
 
   mounted() {
@@ -125,35 +131,39 @@ export default {
 }
 
 .nav .el-menu-item {
-  font-size: 20px;
+  font-size: 25px;
 }
 
 .nav .user {
-  position: absolute;
-  left: 10px;
+  float: left;
+  width: 11%;
 }
 
 .nav .menuContainer {
-  position: absolute;
-  left: 190px;
-  overflow: hidden;
+  float: left;
+  margin: auto;
 }
 
-.nav .el-input {
-  margin: auto;
+.con{
+  margin: 10px auto;
+}
+
+.nav .con .el-input {
+  float: left;
+  border-radius: 0px;
   width: 200px;
   height: 40px;
   font-size: 20px;
 }
 
-.nav .el-input .el-button:hover{
-  background: rgb(46, 155, 219);
-  border-left: 0px;
-  border-right: 0;
-
+.nav .con .el-button{
+  border-radius: 0px;
+  float: left;
 }
 
-
+.nav .con .el-button :hover{
+  background: #c4dff6;
+}
 
 .nav .el-submenu .el-menu-item{
   z-index: 1;
@@ -161,9 +171,8 @@ export default {
 
 .searchBar{
   float: right;
-  margin: auto 120px;
-  margin-top: 10px;
-  background: chartreuse;
+  height: 100%;
+  width: 29%;
 }
 
 

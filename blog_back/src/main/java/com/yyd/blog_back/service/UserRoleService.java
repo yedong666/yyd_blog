@@ -20,7 +20,7 @@ public class UserRoleService {
      * 查询用户权限
      */
     public List<UserRole> findUserRoles(String userRolesId){
-        String[] roleIds = userRolesId.split(", ");
+        String[] roleIds = userRolesId.split(",");
         List<Integer> list = Arrays.stream(roleIds).map(Integer::valueOf).collect(Collectors.toList());
         List<UserRole> userRoleList = userRolesMapper.selectBatchIds(list);
         return userRoleList;

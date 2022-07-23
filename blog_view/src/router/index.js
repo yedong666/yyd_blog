@@ -32,6 +32,25 @@ const router = new Router({
       component: () => import('../views/Login.vue'),
     },
     {
+      path: '/manage',
+      component: () => import('../views/BackManage.vue'),
+      redirect: '/manage/dataview',
+      children: [
+        {
+          path: '/manage/dataview',
+          component: () => import('../components/manage/DataView.vue')
+        },
+        {
+          path: '/manage/userDataview',
+          component: () => import('../components/manage/UserDataView.vue')
+        },
+        {
+          path: '/manage/userListView',
+          component: () => import('../components/manage/UserListView.vue')
+        },
+      ]  
+    },
+    {
       path: '/reginster',
       name: 'Reginster',
       component: () => import('../views/Reginster.vue'),

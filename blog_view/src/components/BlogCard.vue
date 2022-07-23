@@ -7,7 +7,7 @@
                   <el-tag type="success">{{tags[1]}}</el-tag>
                   <el-tag type="info">{{tags[2]}}</el-tag>
             </div>
-          <el-image :src="article.coverImage" style="float: top" v-if="article.coverImage != null">
+          <el-image :src="this.$server.path + article.coverImage" style="float: top" v-if="article.coverImage != null">
 
           </el-image>
            

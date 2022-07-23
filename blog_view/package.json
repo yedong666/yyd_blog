@@ -12,6 +12,7 @@
     "@wangeditor/editor-for-vue": "^1.0.1",
     "async-validator": "^4.0.7",
     "axios": "^0.26.1",
+    "chart.js": "^3.8.0",
     "core-js": "^3.6.5",
     "element-ui": "^2.15.6",
     "highlight.js": "^11.5.1",

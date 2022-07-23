@@ -10,9 +10,12 @@ import store from './store'
 import router from './router/index'
 // import requestConfig from './config/index.js'
 
+const server = {
+  path: 'http://localhost:8888'
+}
 
 Vue.use(ElementUI)
-
+Vue.prototype.$server = server
 Vue.config.productionTip = false
 
 Vue.directive('highlight', function(el){
@@ -20,7 +23,7 @@ Vue.directive('highlight', function(el){
   blocks.forEach((block)=>{
     console.log(block)
     block.style.background = '#f5f2f0'
-    block.style.margin = 'auto 1vw'
+    block.style.margin = '10px 1vw'
     block.style.borderRadius= '10px' 
     hljs.highlightBlock(block)
   })
@@ -31,5 +34,5 @@ Vue.directive('highlight', function(el){
 new Vue({
   render: h => h(App),
   router,
-  store,
+  store,  
 }).$mount('#app')

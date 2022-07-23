@@ -8,12 +8,22 @@ export function loginToBack(account, password) {
     }
     return request({
       url: '/login',
-      method: 'post',
+      method: 'get',
       headers: {
         'Content-Type': 'application/json'
       },
       params: data,
     })
+}
+
+export function getUsers(){
+  return request({
+    url: '/getUsers',
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    }
+  })
 }
 
 export function getUserByIdFromBack(userId){

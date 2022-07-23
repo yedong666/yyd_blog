@@ -18,6 +18,10 @@ export function setUserData(user) {
 }
 
 //从浏览器缓存中移除用户缓存数据(注销)  
-export function removeToken() {
+export function removeUserData() {
     return localStorage.removeItem('user')
+}
+
+export function removeToken() {
+    return localStorage.removeItem('token')
 }

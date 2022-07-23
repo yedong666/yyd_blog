@@ -9,70 +9,71 @@
           </el-carousel-item>
         </el-carousel>
       </div>
+      
     <el-descriptions
       class="margin-top"
       title="基本信息"
-      :column="3"
+      :column="1"
       :size="size"
       border
     >
-      <el-descriptions-item>
+      <el-descriptions-item :contentStyle="{'background': '#b8ddf7'}" :labelStyle="{'background': '#c4dff6'}">
         <template slot="label">
           <i class="el-icon-user"></i>
           姓名
         </template>
         叶栋
       </el-descriptions-item>
-      <el-descriptions-item>
+      <el-descriptions-item :contentStyle="{'background': '#b8ddf7'}" :labelStyle="{'background': '#c4dff6'}">
         <template slot="label">
           <i class="el-icon-mobile-phone"></i>
           性别
         </template>
         男
       </el-descriptions-item>
-      <el-descriptions-item>
+      <el-descriptions-item :contentStyle="{'background': '#b8ddf7'}" :labelStyle="{'background': '#c4dff6'}">
         <template slot="label">
           <i class="el-icon-mobile-phone"></i>
           年龄
         </template>
         20
       </el-descriptions-item>
-      <el-descriptions-item>
+      <el-descriptions-item :contentStyle="{'background': '#b8ddf7'}" :labelStyle="{'background': '#c4dff6'}">
         <template slot="label">
           <i class="el-icon-mobile-phone"></i>
           兴趣爱好
         </template>
         篮球、游戏、电影、阅读
       </el-descriptions-item>
-      <el-descriptions-item>
+      <el-descriptions-item :contentStyle="{'background': '#b8ddf7'}" :labelStyle="{'background': '#c4dff6'}">
         <template slot="label">
           <i class="el-icon-mobile-phone"></i>
           情感状态
         </template>
         单身20年
       </el-descriptions-item>
-      <el-descriptions-item>
+      <el-descriptions-item :contentStyle="{'background': '#b8ddf7'}" :labelStyle="{'background': '#c4dff6'}">
         <template slot="label">
           <i class="el-icon-mobile-phone"></i>
           手机号
         </template>
         18100000000
       </el-descriptions-item>
-      <el-descriptions-item>
+      <el-descriptions-item :contentStyle="{'background': '#b8ddf7'}" :labelStyle="{'background': '#c4dff6'}">
         <template slot="label">
           <i class="el-icon-location-outline"></i>
           居住地
         </template>
         安徽省宣城市
       </el-descriptions-item>
-      <el-descriptions-item>
+      <el-descriptions-item :contentStyle="{'background': '#b8ddf7'}" :labelStyle="{'background': '#c4dff6'}">
         <template slot="label">
           <i class="el-icon-tickets"></i>
           备注
         </template>
         <el-tag size="small">大二在读</el-tag>
-      </el-descriptions-item>
-      <el-descriptions-item>
+      </el-descriptions-item >
+      <el-descriptions-item :contentStyle="{'background': '#b8ddf7'}" :labelStyle="{'background': '#c4dff6'}">
         <template slot="label">
           <i class="el-icon-office-building"></i>
           联系地址
@@ -195,17 +196,19 @@ export default {
 </script>
 
 <style scoped>
+
+
 .el-descriptions {
-  background: white;
   margin-top: 40px;
 }
 
-.el-descriptions-item {
-  background: red;
-}
+
 
 .container {
-  background: white;
+  background: #b8ddf7;
+  padding-left: 5px;
+  padding-top: 10px;
+
 }
 
 .block{
@@ -214,7 +217,6 @@ export default {
 
 .skills {
   margin-top: 40px;
-  background: white;
   height: 320px;
 }
 

@@ -1,7 +1,7 @@
 <template>
   <div class="formContainer">
     <div class="headImg">
-      <img src="https://img0.baidu.com/it/u=1242273181,3992362129&fm=26&fmt=auto">
+      <img src="../assets/avater.png">
     </div>
     <el-form label-position="left" ref="form" :model="user" class="loginForm" :rules="rules">
       <h2 style="margin-bottom: 10px; color: white">欢迎访问叶栋的个人博客</h2>

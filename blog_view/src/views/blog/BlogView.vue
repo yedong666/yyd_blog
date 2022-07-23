@@ -236,13 +236,15 @@ export default {
   overflow: hidden;
 }
 
-.articleContent img{
-  margin: auto;
+::v-deep .articleContent img{
+  width: 90%;
+  margin: 20px 5%;
 }
-
 .articleContent p {
+  display: flexbox;
   margin-top: 10px;
   font-family: sans-serif;
+  justify-content: space-around;
 }
 
 .articleMessages {

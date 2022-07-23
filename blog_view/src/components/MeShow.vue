@@ -4,9 +4,10 @@
       <el-main>
         <div class="pictShow"> 
             <!-- 可通过fit确定图片如何适应到容器框 -->
-            <el-image  src="https://img0.baidu.com/it/u=1242273181,3992362129&fm=26&fmt=auto" >
-
-            </el-image>
+           <el-image
+   
+      :src="avater"
+    ></el-image>
         </div>
         <div class="wordShow">
           <p>男，单身，在校大学生，</p>
@@ -56,6 +57,7 @@ export default {
     data(){
         return{
           gutter: 5,
+          avater:'https://img2.baidu.com/it/u=1451684198,866874194&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=625',
             // qq: "..\assets\qq轻聊.png",
             // phone: "..\assets\电话.png",
             // githup: "..\assets\github-fill.png",

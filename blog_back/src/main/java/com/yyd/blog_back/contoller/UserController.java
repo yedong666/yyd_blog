@@ -29,6 +29,12 @@ public class UserController {
         return Result.success(userService.getAllUsersData());
     }
 
+    @RequestMapping("getUsers")
+    @PreAuthorize("hasAuthority('MANAGER')")
+    public Result getUsers(){
+        return Result.success(userService.getUserVoList());
+    }
+
     @RequestMapping("getUserById")
     @PreAuthorize("hasAuthority('VISITOR')")
     public Result getUserById(@Param("id") Integer id){
@@ -51,8 +57,8 @@ public class UserController {
         return Result.success(map);
     }
 
-    @RequestMapping(value = "logout", method = RequestMethod.POST, produces = "application/json")
-    @PreAuthorize("hasAuthority('VISITOR')")
+    @RequestMapping(value="logout", method = RequestMethod.POST, produces = "application/json")
+    @PreAuthorize("hasAuthority('USER')")
     public Result logout(@RequestBody User userData){
         System.out.println(userData.getNickname());
         PrintfMessage.logRequest("logout");
@@ -60,7 +66,7 @@ public class UserController {
     }
 
     @RequestMapping(value = "register", method = RequestMethod.POST, produces = "application/json")
-    private Result reginster(@RequestBody User userData){
+    public Result reginster(@RequestBody User userData){
         System.out.println(userData.toString());
         PrintfMessage.logRequest("register");
         User newUser = userService.register(userData);

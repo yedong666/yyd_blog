@@ -48,7 +48,7 @@ export default {
         /* position: absolute; */
         /* top: 180px;
         left: 150px; */
-        width: 96%;
+        width: 100%;
         padding-top: 10px;
         padding-bottom: 10px;
         margin:auto;

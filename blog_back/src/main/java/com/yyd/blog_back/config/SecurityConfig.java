@@ -56,10 +56,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //禁用csrf
         //options全部放行
         //post put delete get 全部拦截校验
+        httpSecurity.logout().logoutUrl("logout");
         httpSecurity.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
-                .antMatchers("/login").permitAll()
+                .antMatchers("/login", "/logout").permitAll()
+                .antMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                 .antMatchers(HttpMethod.POST).authenticated()
                 .antMatchers(HttpMethod.PUT).authenticated()
                 .antMatchers(HttpMethod.DELETE).authenticated()

@@ -18,12 +18,11 @@
                 <el-tag type="info" style="left: 144px">{{ article.tags[2] }}</el-tag>
               </div>
             </div>
-            <div class="articleContent" v-html="article.content" v-highlight>
-            </div>
+            <HtmlShow :htmlContent="article.content" v-highlight></HtmlShow>
             <div class="articleFooter">
               <div class="articleMessages">
                 <label for=""><i class="el-icon-view"></i> {{ article.numberOfView }}</label>
-                <label for=""><i class="el-icon-thumb"></i> {{ article.numberOfLike }}</label>
+                <label for="" :style="likeStyle" @click="clickOrCancelLike"><i class="el-icon-thumb"></i> {{ article.numberOfLike }}</label>
                 <label for=""><i class="el-icon-chat-dot-square"></i> {{ article.numberOfComment }}</label>
                 <label style=""><i class="el-icon-bell"></i>2022-3-22 15:39</label>
                 <label style="float: right"><i class="el-icon-date"></i>发表评论</label>
@@ -60,7 +59,7 @@
                   </div>
                   <div class="commentMessages">
                     <label for=""><i class="el-icon-view"></i> {{ comment.numberOfView }}</label>
-                    <label for=""><i class="el-icon-thumb"></i> {{ comment.numberOfLike }}</label>
+                    <label for="" ><i class="el-icon-thumb"></i> {{ comment.numberOfLike }}</label>
                     <label for=""><i class="el-icon-chat-dot-square"></i> {{ comment.numberOfReply }}</label>
                     <label><i class="el-icon-date"></i>2022-3-22 15:39</label>
                     <label style="float: right"><i class="el-icon-top-left"></i>回复</label>
@@ -84,13 +83,16 @@ import MeShow from '@/components/MeShow.vue'
 import SortBar from '@/components/SortBar.vue'
 import FootBar from '@/components/FootBar.vue'
 import UserMenuBar from '@/components/UserMenuBar.vue'
-import { getArticleByIdFromBack } from '@/apis/articles.js'
+import HtmlShow from '@/components/tool/HtmlShow.vue'
+import { getArticleByIdFromBack, clickLike, cancelLike, readArticle} from '@/apis/articles.js'
 import { getCommentByArticleIdFromBack, addCommentToBack } from '@/apis/comments.js'
 import { getUserByIdFromBack } from '@/apis/user.js'
 
 export default {
   data() {
     return {
+      likeFlag: false,
+      likeStyle: '',
       id: Number,
       article: {},
       comments: [],
@@ -102,7 +104,10 @@ export default {
 
   mounted() {
     let that = this
+    let userId = this.$store.state.user == null ? 0 : this.$store.state.user.id
+
     this.id = Number(this.$route.query.articleId)
+    readArticle(userId, this.id)
 
     //异步从服务器获取文章对象
     getArticleByIdFromBack(this.id).then((response) => {
@@ -132,6 +137,22 @@ export default {
   },
 
   methods: {
+    clickOrCancelLike(){
+        let userId = this.$store.state.user == null ? 0 : this.$store.state.user.id
+        let articleId = this.article.id;
+        if(!this.likeFlag){
+          this.likeFlag = true
+          this.likeStyle = "color:#68a5e1"
+          clickLike(userId, articleId)
+          this.article.numberOfLike += 1
+        }else{
+          this.likeStyle = ""
+          cancelLike(userId, articleId)
+          this.article.numberOfLike -= 1
+          this.likeFlag = false
+        }
+      },
+
     showUserMenuBar(isShow) {
       this.isShow = isShow
     },
@@ -197,6 +218,7 @@ export default {
     SortBar,
     FootBar,
     UserMenuBar,
+    HtmlShow,
   },
 }
 </script>

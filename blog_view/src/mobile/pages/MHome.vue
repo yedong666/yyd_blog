@@ -1,5 +1,5 @@
 <template>
-  <div class="mobileHome" @mousewheel="mouseWheel">
+  <div class="mobileHome" @mousewheel="mouseWheel" @touchmove="touchmove" @touchstart='touchstart'>
     <mobile-nav-bar :navStyle="navStyle" :navColor="colorStyle" @changeStyle="styleDown"> </mobile-nav-bar>
 
     <div class="space">
@@ -25,9 +25,34 @@ export default {
       array: [0, 1, 2, 3],
       navStyle: {},
       colorStyle: {},
+      startX: Number,
+      startY: Number,
+      moveX: Number,
+      moveY: Number,
     }
   },
   methods: {
+
+     touchstart (e) {
+	// 如果你要阻止点击事件，请反注释下一行代码
+    // e.preventDefault()
+     this.startX = e.touches[0].clientX
+     this.startY = e.touches[0].clientY
+   },
+
+    touchmove(e) {
+      // e.preventDefault()
+      this.moveX = e.touches[0].clientX
+      this.moveY = e.touches[0].clientY
+      this.startX - this.moveX <= 0 ? console.log('你在往右滑') : console.log('你在往左滑')
+      if (this.startY - this.moveY <= -20) {
+        this.styleDown()
+      }
+      if(this.startY - this.moveY >= 20){
+        this.styleUp()
+      }
+    },
+
     styleUp() {
       this.navStyle = {
         display: 'none',

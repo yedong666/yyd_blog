@@ -57,7 +57,6 @@ public class AuthorizationFilter extends OncePerRequestFilter {
         if(method.equals("OPTIONS")){
             giveFlag = true;
         }
-        System.out.println(request.toString());
         String authHeader = request.getHeader(jwtConfig.getHeader());
 
         if (authHeader != null && authHeader.startsWith(jwtConfig.getPrefix())) {

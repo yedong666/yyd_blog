@@ -91,11 +91,11 @@
           <el-card id="writeContainer" style="min-height: 840px; ">
             <div id="editor-container" ></div>
           </el-card>
-           <el-card id="textShow" v-html="article.content"  style="min-height: 840px; " v-highlight>
-              
+           <el-card id="textShow"   style="min-height: 840px; " >
+            <HtmlShow :htmlContent="article.content" v-highlight></HtmlShow>
            </el-card>
            
-        </el-main>
+          </el-main>
         <el-footer style="background: white; margin: auto; width: 98%; margin-bottom: 10px; padding: 0" height="40px">
           <el-button type="primary" style="width: 100%" @click="showForm">发布</el-button>
         </el-footer>
@@ -110,11 +110,16 @@
 import Background from '@/components/Background.vue'
 import NavBar from '@/components/NavBar.vue'
 import FootBar from '@/components/FootBar.vue'
+import HtmlShow from '@/components/tool/HtmlShow.vue'
 import '@wangeditor/editor/dist/css/style.css'
 import { createEditor, createToolbar} from '@wangeditor/editor'
+import { Boot } from '@wangeditor/editor'
+import markdownModule from '@wangeditor/plugin-md'
 import { addArticleToBack } from '@/apis/articles.js'
 import { getUserData } from '@/request/token.js'
 import { getTagsByClassify } from '@/apis/tags'
+
+Boot.registerModule(markdownModule)
 
 // import $ from 'jquery'
 
@@ -195,6 +200,7 @@ export default {
     Background,
     NavBar,
     FootBar,
+    HtmlShow,
   },
 
   methods: {
@@ -210,6 +216,7 @@ export default {
             path: '/',
           })
         } else {
+          alert("请登录后重试")
           console.log('error submit!!')
           return false
         }
@@ -286,10 +293,11 @@ export default {
   font-size: 16px;
 }
 
+
 ::v-deep #textShow p{
    text-align: left;
-   font-size: 18px;
-   margin: 25px;
+   font-size: 16px;
+   margin: 15px;
 }
 
 .article {
@@ -336,7 +344,7 @@ export default {
 }
 
 #textShow{
-  font-size: 20px;
+  
 }
 
 .tagCon{

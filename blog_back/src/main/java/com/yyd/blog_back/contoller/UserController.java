@@ -5,7 +5,6 @@ import com.yyd.blog_back.common.util.PrintfMessage;
 import com.yyd.blog_back.entity.People;
 import com.yyd.blog_back.entity.User;
 import com.yyd.blog_back.service.LoginService;
-import com.yyd.blog_back.service.MyUserDetailService;
 import com.yyd.blog_back.service.UserService;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;

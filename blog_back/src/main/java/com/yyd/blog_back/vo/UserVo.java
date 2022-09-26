@@ -2,7 +2,6 @@ package com.yyd.blog_back.vo;
 
 import com.yyd.blog_back.entity.User;
 import lombok.Data;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.io.Serializable;
 

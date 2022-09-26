@@ -1,6 +1,5 @@
 package com.yyd.blog_back.service;
 
-import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yyd.blog_back.entity.UserRole;
 import com.yyd.blog_back.mapper.UserRolesMapper;
 import org.springframework.beans.factory.annotation.Autowired;

@@ -2,22 +2,17 @@ package com.yyd.blog_back.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.yyd.blog_back.common.util.CreateAccount;
-import com.yyd.blog_back.common.util.JWTUtil;
 import com.yyd.blog_back.config.JwtConfig;
-import com.yyd.blog_back.entity.MyUserDetail;
 import com.yyd.blog_back.entity.User;
 import com.yyd.blog_back.mapper.UserMapper;
 import com.yyd.blog_back.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
-import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 
 @Service

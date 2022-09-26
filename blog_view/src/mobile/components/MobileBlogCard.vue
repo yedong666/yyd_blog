@@ -1,7 +1,7 @@
 <template>
   <div class="container">
       <div class="top">
-          <img :src="article.coverImage" v-if="article.coverImage != null">
+          <img :src="this.$server.path + article.coverImage" v-if="article.coverImage != null">
       </div>
       <div class="middle">
           <ul class="title">

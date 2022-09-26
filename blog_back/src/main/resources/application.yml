@@ -1,6 +1,11 @@
 address: http://localhost:8888/
+
+page:
+  size: 5
+
 file:
   location: C:\\Users\\lee\\Desktop\\myblog\\blog_back\\src\\main\\resources\\static\\
+#   location: /root/yyd_blog/static/
 # Tomcat
 server:
   tomcat:
@@ -12,6 +17,15 @@ server:
   #连接超时时间
   connection-timeout: 5000ms
 spring:
+  rabbitmq:
+    host: 49.234.51.235
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: my_vhost
+  elasticsearch:
+    rest:
+      uris: localhost:9200
   servlet:
     multipart:
       max-request-size: 100MB #设置总上传数据总大小
@@ -67,3 +81,8 @@ spring:
 mybatis-plus:
   mapper-locations: classpath:mapper/*.xml
   type-aliases-package: com.yyd.blog_back.entity  #所有entity别名所在包
+
+searchMode: "ELASTICSEARCH"
+
+logging:
+  config: classpath:logback-spring.xml

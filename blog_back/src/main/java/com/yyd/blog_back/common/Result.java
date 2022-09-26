@@ -30,6 +30,10 @@ public class Result extends HashMap<String, Object> implements Serializable {
         return new Result(Code.NOT_FOUND_RESOURSE, Message.ERROR, errorMessage);
     }
 
+    public static Result warning(String warningMessage) {
+        return new Result(Code.SERVER_ERROR_CODE, Message.WARNING, warningMessage);
+    }
+
     /**
      * 封装业务数据
      *

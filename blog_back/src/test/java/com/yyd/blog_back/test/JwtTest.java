@@ -1,7 +1,6 @@
 package com.yyd.blog_back.test;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.yyd.blog_back.common.util.JWTUtil;
 import com.yyd.blog_back.entity.User;
 import com.yyd.blog_back.mapper.UserMapper;
 import org.junit.jupiter.api.Test;

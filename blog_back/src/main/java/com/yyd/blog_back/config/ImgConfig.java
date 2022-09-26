@@ -15,12 +15,12 @@ public class ImgConfig implements WebMvcConfigurer {
         // 映射图片保存地址
         //文章封面
         registry.addResourceHandler("/imgs/articleCoverImg/**")
-                .addResourceLocations("file:" + filelocation + "imgs\\articleCoverImg\\");
+                .addResourceLocations("file:" + filelocation + "imgs/articleCoverImg/");
         //标签封面
         registry.addResourceHandler("/imgs/tagImg/**")
-                .addResourceLocations("file:" + filelocation + "imgs\\tagImg\\");
+                .addResourceLocations("file:" + filelocation + "imgs/tagImg/");
         //头像
         registry.addResourceHandler("/imgs/avaterImg/**")
-                .addResourceLocations("file:" + filelocation + "imgs\\avaterImg\\");
+                .addResourceLocations("file:" + filelocation + "imgs/avaterImg/");
     }
 }

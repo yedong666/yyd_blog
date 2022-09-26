@@ -31,4 +31,10 @@ public class Article {
     private Boolean isPublicCommentArea;
     @TableField("isAllowedTurn")
     private Boolean isAllowedTurn;
+    @TableField("createTime")
+    private String createTime;
+
+    public int getHot(){
+        return numberOfView + numberOfLike*10 + numberOfComment*10;
+    }
 }

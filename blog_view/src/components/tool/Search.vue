@@ -1,8 +1,8 @@
 <template>
   <div class="container">
     <div class="bar" id="bar">
-      <input type="text" placeholder="请输入搜索内容" @focus="showMsg" @blur="closeMsg" />
-      <span>
+      <input v-model="keyword" type="text" placeholder="请输入搜索内容" @focus="showMsg" @blur="closeMsg" />
+      <span @click="search">
         <img src="../../assets/search.png" />
       </span>
     </div>
@@ -52,6 +52,7 @@ export default {
   data() {
     return {
       isShow: false,
+      keyword: '',
     }
   },
   methods: {
@@ -65,6 +66,17 @@ export default {
       document.getElementById('bar').style.borderRadius = '10px'
       document.getElementById('bar').style.borderBottom="2px solid #3399ff"
     },
+    search(){
+      this.$router.push({
+        path: '/home/search',
+        query:{
+              keyword: this.keyword,
+            }
+      }).then(()=>{
+        this.$router.go(0)
+      })
+      
+    }
   },
 }
 </script>

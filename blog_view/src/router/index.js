@@ -88,6 +88,28 @@ const router = new Router({
         {
           path: 'blogclassify',
           component: () => import('../components/Classify.vue'),
+          children:[
+
+          ]
+        },
+        {
+          path: 'search',
+          component: () => import('../components/search/SearchList.vue'),
+          redirect: '/home/search/searchBlogList',
+          children:[
+            {
+              path: 'searchBlogList',
+              component: () => import('../components/search/SearchBlogList.vue'),
+            },
+            {
+              path: 'searchTagList',
+              component: () => import('../components/search/SearchTagList.vue'),
+            },
+            {
+              path: 'searchUserList',
+              component: () => import('../components/search/SearchUserList.vue'),
+            },
+          ]
         },
         {
           path: 'about',
@@ -106,6 +128,7 @@ const router = new Router({
       name: 'MeShow',
       component: () => import('../components/MeShow.vue'),
     },
+
     {
       path: '/sort',
       name: 'SortBar',

@@ -3,6 +3,9 @@
         <BlogCard v-for="article, i in articles" :key="i" :article = "article">
 
         </BlogCard>
+
+      <el-pagination @current-change="handleCurrentChange" :current-page.sync="pageNum" :page-size="5" :hide-on-single-page="false" background layout="prev, pager, next" :total="articlesCount"> </el-pagination>
+
     </div>
      
 </template>
@@ -11,29 +14,55 @@
 
 import BlogCard from '@/components/BlogCard.vue'
 
-import {getAllArticlesFromBack} from '@/apis/articles'
+import {getPageArticles, getArticlesCount} from '@/apis/articles'
 
 export default {
     data(){
         return{
             array: [1, 2, 3, 4, 5],
-            articles: []
+            articles: [],
+            articlesCount: 0,
+            pageNum: this.$route.query.pageNum,
         }
     },
 
      mounted(){
         let that = this
-         getAllArticlesFromBack().then(response=>{
-             that.articles =  response.data.data
-             this.$store.commit('saveArticles', that.articles)
+
+        if(this.$route.query.pageNum != null){
+            this.pageNum = this.$route.query.pageNum
+        }
+
+        getArticlesCount().then(response=>{
+             that.articlesCount =  response.data.data
          }).catch(error => { 
           console.log(error)
         })
+
+         getPageArticles(this.pageNum).then(response=>{
+             that.articles =  response.data.data
+         }).catch(error => { 
+          console.log(error)
+        })
+
     },
 
     components:{
         BlogCard,
-    }
+    },
+
+    methods:{
+     handleCurrentChange(val) {
+        this.$router.push({
+            path: '/home/bloglist',
+            query:{
+              pageNum: val
+            }
+          }).then(()=>{
+            this.$router.go(0)
+          })
+      },
+  }
 }
 </script>
 

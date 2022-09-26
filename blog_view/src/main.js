@@ -11,7 +11,7 @@ import router from './router/index'
 // import requestConfig from './config/index.js'
 
 const server = {
-  path: 'http://localhost:8888'
+  path: '/backend'
 }
 
 Vue.use(ElementUI)

@@ -56,6 +56,7 @@ public class LoginService {
         //用户名 密码 匹配 签发token
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(account, password);
         Authentication authentication = authenticationManager.authenticate(authenticationToken);
+
         if(authentication==null){
             System.out.println("认证失败");
             return null;

@@ -25,7 +25,7 @@
         </el-main>
         <el-footer>
             <label for=""><i class="el-icon-view"></i> {{article.numberOfView}}</label>
-            <label for=""><i class="el-icon-thumb"></i> {{article.numberOfLike}}</label>
+            <label for="" @click="clickOrCancelLike" :style="likeStyle"><i class="el-icon-thumb"></i> {{article.numberOfLike}}</label>
             <label for=""><i class="el-icon-chat-dot-square"></i> {{article.numberOfComment}}</label>
             <el-link style="float: right; margin-right: 20px" @click="jumpToArticleView">阅读全文</el-link>
         </el-footer>
@@ -35,23 +35,16 @@
 </template>
 
 <script>
+
+import {clickLike, cancelLike} from '@/apis/articles'
+
 export default {
     name: 'BlogCard',
     data(){
         return{
           flag: true,
-            // article: {
-            //     title: 'Java的前世今生',
-            //     content: 'Java是一门面向对象编程语言，不仅吸收了C++语言的各种优点，还摒弃了C++里难以理解的多继承、指针等概念,' +
-            //                'Java语言作为静态面向对象编程语言的代表，' +
-            //                 '极好地实现了面向对象理论，允许程序员以优雅的思维方式进行复杂的编程。Java具有简单性、面向对象、' +
-            //                 '分布式、健壮性、安全性、平台独立与可移植性、多线程、动态性等特点......',
-            //     categories: ['分享生活', '技术交流', '项目分析'],
-            //     comments: 10,
-            //     thumbUpFor: 45,
-            //     numberOfBorwse: 19,
-            //     image: 'https://img1.baidu.com/it/u=3857894473,1215456774&fm=253&fmt=auto&app=138&f=JPEG?w=500&h=334',
-            // }
+          likeFlag: false,
+          likeStyle: '',
             tags: [],
         }
     },
@@ -76,6 +69,21 @@ export default {
               articleId:Number( this.article.id)
             }
           })
+      },
+      clickOrCancelLike(){
+        let userId = this.$store.state.user == null ? 0 : this.$store.state.user.id
+        let articleId = this.article.id;
+        if(!this.likeFlag){
+          this.likeFlag = true
+          this.likeStyle = "color:#68a5e1"
+          clickLike(userId, articleId)
+          this.article.numberOfLike += 1
+        }else{
+          this.likeStyle = ""
+          cancelLike(userId, articleId)
+          this.article.numberOfLike -= 1
+          this.likeFlag = false
+        }
       }
     }
    

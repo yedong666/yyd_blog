@@ -10,6 +10,7 @@
   "dependencies": {
     "@wangeditor/editor": "^5.0.1",
     "@wangeditor/editor-for-vue": "^1.0.1",
+    "@wangeditor/plugin-md": "^1.0.0",
     "async-validator": "^4.0.7",
     "axios": "^0.26.1",
     "chart.js": "^3.8.0",

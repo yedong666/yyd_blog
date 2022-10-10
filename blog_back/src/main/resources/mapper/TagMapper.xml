@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.yyd.blog_back.mapper.TagMapper">
+    <resultMap id="BaseResultMap" type="com.yyd.blog_back.entity.Tag">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <id column="name" property="name" jdbcType="VARCHAR"/>
+        <id column="imgUrl" property="imgUrl" jdbcType="VARCHAR"/>
+        <id column="description" property="description" jdbcType="VARCHAR"/>
+        <id column="classify" property="classify" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <insert id="create" parameterType="Tag" useGeneratedKeys="true" keyProperty="id">
+        insert into tag(name, imgUrl, description, classify) values (#{name}, #{imgUrl}, #{description}, #{classify})
+    </insert>
+
+    <select id="getTagById" parameterType="Integer" resultMap="BaseResultMap">
+        select * from tag where id = #{id}
+    </select>
+
+
+</mapper>

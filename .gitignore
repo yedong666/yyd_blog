@@ -1,58 +1,4 @@
-blog_back/.gitignore
-HELP.md
-target/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/main/**/target/
-!**/src/test/**/target/
-
-### STS ###
-.apt_generated
-.classpath
-.factorypath
-.project
-.settings
-.springBeans
-.sts4-cache
-
-### IntelliJ IDEA ###
-.idea
-*.iws
-*.iml
-*.ipr
-.mvn/
-mvnw
-mvnw.cmd
-test.*
-
-### NetBeans ###
-/nbproject/private/
-/nbbuild/
-/dist/
-/nbdist/
-/.nb-gradle/
-build/
-!**/src/main/**/build/
-!**/src/test/**/build/
-
-### VS Code ###
-.vscode/
-
-.DS_Store
-node_modules
-/dist
-
-# local env files
-.env.local
-.env.*.local
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Editor directories and files
-.idea
-
+### 软件配置文件过滤 ###
 .vscode
 *.iml
 *.suo
@@ -60,3 +6,34 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw?
+.env.local
+.env.*.local
+.idea
+*.iws
+*.ipr
+.mvn/
+mvnw
+mvnw.cmd
+
+### 软件日志文件过滤 ###
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+### 项目依赖文件过滤 ###
+node_modules/
+
+### 项目输出文件过滤 ###
+dist/
+target/
+
+### 项目测试文件过滤 ###
+test
+test/
+
+### 其它文件过滤 ###
+blog_back/.gitignore
+HELP.md
+*.jar
+*.tar
+

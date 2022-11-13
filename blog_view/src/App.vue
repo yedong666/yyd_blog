@@ -1,6 +1,7 @@
 <template>
   <div id="app">
       <router-view></router-view>
+       <!-- 回到顶部 -->
       <GoTop class="goTop"></GoTop>
   </div>
 </template>
@@ -8,6 +9,7 @@
 <script>
 
 import GoTop from '@/components/GoTop.vue'
+
 
 export default {
   name: 'App',

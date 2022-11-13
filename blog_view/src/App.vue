@@ -10,7 +10,7 @@
 
 import GoTop from '@/components/GoTop.vue'
 
-//git40
+//git50
 export default {
   name: 'App',
   components: {

@@ -29,7 +29,6 @@ Vue.directive('highlight', function(el){
   })
 })
 
-// requestConfig()
 
 new Vue({
   render: h => h(App),

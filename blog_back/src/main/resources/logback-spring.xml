@@ -26,7 +26,7 @@
 
     <!--logstash配置-->
     <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
-        <destination>127.0.0.1:6999</destination>
+        <destination>116.62.242.203:4561</destination>
         <!-- 日志输出编码 -->
         <encoder charset="UTF-8" class="net.logstash.logback.encoder.LoggingEventCompositeJsonEncoder">
             <providers>
@@ -49,10 +49,8 @@
         </encoder>
         <!--<encoder charset="UTF-8" class="net.logstash.logback.encoder.LogstashEncoder"/>-->
     </appender>
-
-    <root level="INFO">
+    <root>
         <appender-ref ref="LOGSTASH"/>
         <appender-ref ref="CONSOLE"/>
     </root>
-
 </configuration>

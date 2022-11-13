@@ -1,0 +1,14 @@
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (1, '讲得真好', 1, 1, 4, '2022-4-22 17:59', 78, 29, 67);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (2, '讲得真棒', 2, 1, 3, '2022-4-22 18:59', 24, 32, 67);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (3, '讲得真详细', 2, 1, 5, '2022-4-22 20:59', 45, 56, 12);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (4, '讲得真仔细', 2, 3, 2, '2022-4-22 22:59', 26, 23, 12);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (5, '讲得好厉害', 3, 3, 4, '2022-4-22 0:59', 56, 25, 18);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (6, '啊大大', 1, 10, 0, '2022-04-17 13:50:42', 0, 0, 0);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (7, '多大啊', 1, 10, 0, '2022-04-17 13:51:04', 0, 0, 0);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (8, '哒哒哒', 1, 10, 0, '2022-04-17 13:51:15', 0, 0, 0);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (9, 'wdad ', 1, 10, 0, '2022-04-30 13:48:27', 0, 0, 0);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (10, 'daadw', 1, 1, 0, '2022-06-25 10:40:48', 0, 0, 0);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (11, 'hello', 1, 2, 0, '2022-06-29 12:10:03', 0, 0, 0);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (12, '可以', 1, 1, 0, '2022-07-07 16:18:16', 0, 0, 0);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (13, 'yyds', 6, 1, 0, '2022-07-10 11:14:07', 0, 0, 0);
+INSERT INTO `comment`(`id`, `content`, `observerId`, `articleId`, `replyId`, `date`, `numberOfLike`, `numberOfReply`, `numberOfView`) VALUES (14, 'adad', 7, 1, 0, '2022-07-11 16:35:35', 0, 0, 0);

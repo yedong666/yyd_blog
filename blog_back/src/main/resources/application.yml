@@ -17,6 +17,8 @@ server:
   #连接超时时间
   connection-timeout: 5000ms
 spring:
+  application:
+    name: yyd_blog
   rabbitmq:
     host: 49.234.51.235
     port: 5672
@@ -25,7 +27,7 @@ spring:
     virtual-host: my_vhost
   elasticsearch:
     rest:
-      uris: localhost:9200
+      uris: 116.62.242.203:9200
   servlet:
     multipart:
       max-request-size: 100MB #设置总上传数据总大小
@@ -54,7 +56,7 @@ spring:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.cj.jdbc.Driver
     druid:
-      url: jdbc:mysql://49.234.51.235:3306/yyd_blog?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT
+      url: jdbc:mysql://116.62.242.203/yyd_blog?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT
       username: root
       password: lcy712YYD*
       initial-size: 10

@@ -1,4 +1,4 @@
---创建user表
+
 drop table if exists yyd_blog.user;
 CREATE TABLE `yyd_blog`.`user`
 (
@@ -7,19 +7,20 @@ CREATE TABLE `yyd_blog`.`user`
     `password`    VARCHAR(100) NULL,
     `nickname`    VARCHAR(12) NULL,
     `phoneNumber` VARCHAR(11) NULL,
+    `rolesId` VARCHAR(20) NULL,
     `email`       VARCHAR(20) NULL,
     `status`      INT NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
---创建article表
+
 drop table if exists yyd_blog.article;
 CREATE TABLE `yyd_blog`.`article`
 (
     `id`                  INT NOT NULL AUTO_INCREMENT,
     `title`               varchar(100) NULL,
-    `content`             VARCHAR(1000) NULL,
+    `content`             text NULL,
     `summarize`           text NULL,
     `author`              VARCHAR(20) NULL,
     `coverImage`          varchar(100) NULL,
@@ -31,27 +32,29 @@ CREATE TABLE `yyd_blog`.`article`
     `isView`              tinyint(1) NULL,
     `isPublicCommentArea` tinyint(1) NULL,
     `isAllowedTurn`       tinyint(1) NULL,
+    `createTime` varchar(30) NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
---创建tags表
-drop table if exists yyd_blog.tags;
-CREATE TABLE `yyd_blog`.`tags`
+
+drop table if exists yyd_blog.tag;
+CREATE TABLE `yyd_blog`.`tag`
 (
     `id`          INT NOT NULL AUTO_INCREMENT,
     `name`        varchar(20) NULL,
     `imgUrl`      varchar(50) NULL,
     `description` varchar(500) NULL,
+    `classify`  varchar(30) NULL,
     PRIMARY KEY (`id`)
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
 
---创建comments表
-drop table if exists yyd_blog.comments;
-CREATE TABLE `yyd_blog`.`comments`
+
+drop table if exists yyd_blog.comment;
+CREATE TABLE `yyd_blog`.`comment`
 (
     `id`            INT NOT NULL AUTO_INCREMENT,
     `content`       text NULL,
@@ -76,6 +79,7 @@ CREATE TABLE `yyd_blog`.`userRole`
 ) ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
+drop table if exists yyd_blog.controlRecord;
 CREATE TABLE `yyd_blog`.`controlRecord`
 (
     `id`          INT NOT NULL AUTO_INCREMENT,

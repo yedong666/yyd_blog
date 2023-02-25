@@ -22,7 +22,7 @@ public class MySearchContext {
      * 搜索模式 (在配置文件中配置)
      * 根据搜索模式选择搜索策略
      */
-    @Value("${searchMode}")
+    @Value("${project.searchMode}")
     private String searchMode;
 
     //策略名到策略实现映射

@@ -1,7 +1,7 @@
 package com.yyd.blog_back.service;
 
 import com.yyd.blog_back.entity.UserRole;
-import com.yyd.blog_back.mapper.UserRolesMapper;
+import com.yyd.blog_back.mapper.UserRoleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,7 +13,7 @@ import java.util.stream.Collectors;
 public class UserRoleService {
 
     @Autowired
-    private UserRolesMapper userRolesMapper;
+    private UserRoleMapper userRolesMapper;
 
     /**
      * 查询用户权限

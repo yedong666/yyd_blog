@@ -20,8 +20,9 @@
         <el-menu-item @click="jumpTo('/home')" >首页</el-menu-item>
         <el-menu-item  @click="jumpTo('/home/blogclassify')">博客分类</el-menu-item>
         <el-menu-item index="4"  @click="jumpTo('/blogwrite')">写博客</el-menu-item>
-        <el-menu-item index="5"  @click="jumpTo('/manage')">后台管理</el-menu-item>
-        <el-menu-item index="6" @click="jumpTo('/home/about')">关于博主</el-menu-item>
+        <el-menu-item index="5"  @click="jumpTo('/blogwrite')">资源中心</el-menu-item>
+        <el-menu-item index="6"  @click="jumpTo('/manage')">后台管理</el-menu-item>
+        <el-menu-item index="7" @click="jumpTo('/home/about')">关于博主</el-menu-item>
       </el-menu>
     </div>
 
@@ -123,15 +124,16 @@ export default {
 
 <style scoped>
 .nav {
-  position: relative;
   width: 100%;
   height: 100%;
   background: #b8ddf7;
+  border-bottom: 2px solid white;
+  border-top: 2px solid white;
   /* opacity: 90%; */
 }
 
 .nav .el-menu-item {
-  font-size: 25px;
+  font-size: 20px;
 }
 
 .nav .user {

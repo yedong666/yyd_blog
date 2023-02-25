@@ -1,10 +1,12 @@
 <template>
   <div class="home">
+    
     <el-container>
-      <el-container class="head">
-          <el-header height="100px"><Background></Background> </el-header>
-          <el-footer style="padding: 0;" height="60px" v-if="flag"><NavBar @show="showUserMenuBar"></NavBar></el-footer>
-      </el-container>
+      <el-header height="100px"><Background></Background> </el-header>
+      <div class="menu">
+      <el-footer style="padding: 0;" height="60px" v-if="flag"><NavBar @show="showUserMenuBar"></NavBar></el-footer>
+
+      </div>
       <el-container class="main">
         <el-aside width="11%"  v-if = "isShow"><UserMenuBar @closeMenu="showUserMenuBar"></UserMenuBar></el-aside>
         <el-main ><router-view></router-view></el-main>
@@ -74,6 +76,13 @@ export default {
   .home{
     width: 100%;
     height: 100%;
+  }
+
+  .menu{
+    position: -webkit-sticky;
+    position: sticky;
+      top: 0;
+    z-index: 5;
   }
 
   .home .main{

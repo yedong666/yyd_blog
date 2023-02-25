@@ -101,9 +101,9 @@ export default {
 
   @media screen and (min-width: 1200px){
      .blogCardContainer{
-      box-shadow: 10px 10px 10px 10px gray;
+      box-shadow: 5px 5px 5px 5px gray;
       border-radius: 15px;
-      margin: 50px 50px;
+      margin: 40px 40px;
       margin-top: 20px;
       width: 90%;
   }
@@ -181,21 +181,4 @@ export default {
   }
   }
 
- 
-
-
-
-  
-  /* body > .el-container {
-    margin-bottom: 40px;
-  }
-  
-  .el-container:nth-child(5) .el-aside,
-  .el-container:nth-child(6) .el-aside {
-    line-height: 260px;
-  }
-  
-  .el-container:nth-child(7) .el-aside {
-    line-height: 320px;
-  } */
 </style>

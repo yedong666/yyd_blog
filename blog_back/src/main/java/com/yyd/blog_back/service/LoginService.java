@@ -40,7 +40,7 @@ public class LoginService {
     private AuthenticationManager authenticationManager;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     public Map<String, Object> login(String account, String password){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
@@ -48,7 +48,7 @@ public class LoginService {
         User dbUser = userMapper.selectOne(queryWrapper);
         System.out.println(bCryptPasswordEncoder.matches(password, dbUser.getPassword()));
         //此用户不存在 或 密码错误
-        if (null == dbUser || !bCryptPasswordEncoder.matches(password, dbUser.getPassword())) {
+        if (dbUser == null || !bCryptPasswordEncoder.matches(password, dbUser.getPassword())) {
             System.out.println(password + ":" + dbUser.getPassword());
             return null;
         }

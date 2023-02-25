@@ -9,7 +9,7 @@
         </p>
       </div>
     </div>
-    <div class="link-container">
+    <div class="link-container" >
       <h2>最新文章--------新鲜事快速发现</h2>
       <el-divider></el-divider>
       <div class="sortLink" v-for="(link, index) in newArticles" :key="index">
@@ -111,6 +111,8 @@ h2{
   background: #b8ddf7;
   margin-bottom: 20px;
   overflow: hidden;
+  border: 2px solid white;
+
 }
 
 .sortBar-container .el-row {

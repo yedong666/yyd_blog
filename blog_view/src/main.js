@@ -18,6 +18,12 @@ Vue.use(ElementUI)
 Vue.prototype.$server = server
 Vue.config.productionTip = false
 
+import JwChat from 'jwchat';
+
+/* 在 0.2.041 之前的版本需要引入 css */
+// import 'jwchat/lib/JwChat.css';
+Vue.use(JwChat)
+
 Vue.directive('highlight', function(el){
   const blocks = el.querySelectorAll('pre code')
   blocks.forEach((block)=>{

@@ -23,7 +23,7 @@ public class MyUserDetailService implements UserDetailsService {
     private UserMapper userMapper;
 
     @Autowired
-    private RedisTemplate redisTemplate;
+    private RedisTemplate<String, Object> redisTemplate;
 
     @Autowired
     private JwtConfig jwtConfig;
@@ -64,7 +64,7 @@ public class MyUserDetailService implements UserDetailsService {
         }
 
         String redisToken = (String) redisTemplate.opsForValue().get(JwtConfig.REDIS_TOKEN_KEY_PREFIX + username);
-        //从redis中取不到值 或 值 不匹配
+        //从redis中取不到值 或 值不匹配
         if (!authHeader.equals(redisToken)) {
             return null;
         }

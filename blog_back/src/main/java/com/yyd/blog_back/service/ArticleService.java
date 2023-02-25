@@ -1,27 +1,19 @@
 package com.yyd.blog_back.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
 import com.yyd.blog_back.common.BaseImpl.EntityAccessService;
-import com.yyd.blog_back.common.BaseObj.BaseEntityObject;
-import com.yyd.blog_back.common.BaseObj.BaseSearchObject;
-import com.yyd.blog_back.common.RedisData.ControlRecordStore;
-import com.yyd.blog_back.common.annotation.SaveRedisData;
 import com.yyd.blog_back.common.util.DateUtil;
 import com.yyd.blog_back.dto.ArticleHotDto;
 import com.yyd.blog_back.dto.ArticleNewDto;
-import com.yyd.blog_back.dto.ArticleSearchDto;
 import com.yyd.blog_back.entity.Article;
 import com.yyd.blog_back.entity.ControlRecord;
 import com.yyd.blog_back.mapper.ArticleMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.security.core.parameters.P;
 import org.springframework.stereotype.Service;
 
-import javax.naming.ldap.Control;
 import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
@@ -31,10 +23,7 @@ public class ArticleService extends ServiceImpl<ArticleMapper, Article> implemen
     @Autowired
     private ArticleMapper articleMapper;
 
-    @Autowired
-    private ControlRecordStore controlRecordStore;
-
-    @Value("${page.size}")
+    @Value("${project.page.size}")
     private Integer pageSize;
 
     /**
@@ -98,27 +87,6 @@ public class ArticleService extends ServiceImpl<ArticleMapper, Article> implemen
     public List<ArticleNewDto> getNewArticles() {
         return articleMapper.selectList(new QueryWrapper<Article>().select("id", "title", "createTime").orderByDesc("createTime").last("limit 10"))
                 .stream().map(ArticleNewDto::new).collect(Collectors.toList());
-    }
-
-    public boolean clickLike(Integer userId, Integer articleId) {
-        ControlRecord controlRecord = ControlRecord.builder().userId(userId)
-                    .articleId(articleId).controlType("clickLike").controlTime(DateUtil.getTime()).build();
-        controlRecordStore.addControlRecord(controlRecord);
-        return true;
-    }
-
-    public boolean cancelLike(Integer userId, Integer articleId) {
-        ControlRecord controlRecord = ControlRecord.builder().userId(userId)
-                .articleId(articleId).controlType("cancelLike").controlTime(DateUtil.getTime()).build();
-        controlRecordStore.addControlRecord(controlRecord);
-        return true;
-    }
-
-    public boolean readArticle(Integer userId, Integer articleId){
-        ControlRecord controlRecord = ControlRecord.builder().userId(userId)
-                .articleId(articleId).controlType("readArticle").controlTime(DateUtil.getTime()).build();
-        controlRecordStore.addControlRecord(controlRecord);
-        return true;
     }
 
     @Override

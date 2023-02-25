@@ -57,6 +57,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         //options全部放行
         //post put delete get 全部拦截校验
         httpSecurity.logout().logoutUrl("logout");
+
         httpSecurity.csrf().disable()
                 .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                 .authorizeRequests()
@@ -70,4 +71,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .addFilterBefore(authenticationTokenFilterBean(), UsernamePasswordAuthenticationFilter.class);
         httpSecurity.headers().cacheControl();
     }
+
+    @Override
+    public void configure(WebSecurity webSecurity){
+//        webSecurity.ignoring().antMatchers(
+//                "/websocket/**"
+//        );
+    }
+
 }

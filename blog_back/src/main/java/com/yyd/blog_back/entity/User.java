@@ -5,17 +5,24 @@ import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import io.swagger.annotations.ApiModel;
 import lombok.Data;
 
 import java.io.Serializable;
 
-
+/**
+ * 用户管理信息
+ */
 @Data
 @TableName("user")
+@ApiModel(value = "User",description = "用户管理信息类")
 public class User implements Serializable {
     @JsonProperty(value = "id")
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;
+
+    @TableField("userDataId")
+    private Integer userDataId;
 
     @JsonProperty(value = "account")
     @TableField("account")
@@ -41,8 +48,16 @@ public class User implements Serializable {
     @TableField("email")
     private String email;
 
+    @TableField("numOfFan")
+    private Integer numOfFan;
+    @TableField("numOfArticle")
+    private Integer numOfArticle;
+
     @JsonProperty(value = "status")
     @TableField("status")
     private Integer status;
+
+    @TableField("createTime")
+    private String createTime;
 }
 

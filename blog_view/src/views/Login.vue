@@ -3,34 +3,52 @@
     <div class="headImg">
       <img src="../assets/avater.png">
     </div>
-    <el-form label-position="left" ref="form" :model="user" class="loginForm" :rules="rules">
-      <h2 style="margin-bottom: 10px; color: white">欢迎访问叶栋的个人博客</h2>
-      <el-form-item prop="account">
-        <el-input type="text" auto-complete="false" placeholder="账号" v-model="user.account"></el-input>
-      </el-form-item>
-      <el-form-item prop="password">
-        <el-input type="password" auto-complete="false" placeholder="密码" v-model="user.password"></el-input>
-      </el-form-item>
-      <el-form-item prop="code">
-        <el-input
-          class="codeInput"
-          type="text"
-          placeholder="验证码"
-          v-model="user.code"
-          style="width: 45%; float: left; margin-right:10px "
-        ></el-input>
-        <valid-code></valid-code>
-      </el-form-item>
-      <el-tooltip class="item" effect="dark" content="登录后才能获得完整权限" placement="top">
-        <el-button @click="login('form')">登录</el-button>
-      </el-tooltip>
-      <el-tooltip class="item" effect="dark" content="点击注册账号" placement="top">
-        <el-button @click="reginster">注册</el-button>
-      </el-tooltip>
-      <el-tooltip class="item" effect="dark" content="游客模式下不可以评论和留言哦" placement="top">
-        <el-button @click="test">游客访问</el-button>
-      </el-tooltip>
-    </el-form>
+    <div class="dataCon">
+      <el-form label-position="left" ref="form" :model="user" class="loginForm" :rules="rules">
+        <h2 style="margin-bottom: 10px; color: white">欢迎访问YY论坛</h2>
+        <el-form-item prop="account">
+          <el-input type="text" auto-complete="false" placeholder="账号" v-model="user.account"></el-input>
+        </el-form-item>
+        <el-form-item prop="password">
+          <el-input type="password" auto-complete="false" placeholder="密码" v-model="user.password"></el-input>
+        </el-form-item>
+        <el-form-item prop="code">
+          <el-input
+              class="codeInput"
+              type="text"
+              placeholder="验证码"
+              v-model="user.code"
+              style="width: 45%; float: left; margin-right:10px "
+          ></el-input>
+          <valid-code></valid-code>
+        </el-form-item>
+        <el-tooltip class="item" effect="dark" content="登录后才能获得完整权限" placement="top">
+          <el-button @click="login('form')">登录</el-button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="点击注册账号" placement="top">
+          <el-button @click="reginster">注册</el-button>
+        </el-tooltip>
+        <el-tooltip class="item" effect="dark" content="游客模式下不可以评论和留言哦" placement="top">
+          <el-button @click="test">游客访问</el-button>
+        </el-tooltip>
+      </el-form>
+      <div class="apps">
+        <div class="thirdPartyApp" @click="thirdPartyLogin()">
+          <img src="..\assets\wechat.png" alt="">
+        </div>
+        <div class="thirdPartyApp">
+          <img src="..\assets\gitee.png" alt="">
+        </div>
+        <div class="thirdPartyApp">
+          <img src="..\assets\github-fill.png" alt="">
+        </div>
+        <div class="thirdPartyApp">
+          <img src="..\assets\icon_QQ.png" alt="">
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -96,6 +114,10 @@ export default {
       })
     },
 
+    thirdPartyLogin(){
+
+    },
+
     test() {
     },
 
@@ -112,15 +134,17 @@ export default {
 
 <style scoped>
 .formContainer {
-  position: absolute;
   display: flex;
   flex-direction: column;
+  width: 500px;
+  height: 500px;
+  margin: 30px auto;
+  border: 2px solid #b3d8ff;
+  background-image: linear-gradient(141deg,white 0%,#1fc8db 51%,wheat 75%);
+  box-shadow: 0 0 10px gray;
+  border-radius: 15px;
 
-  width: 100%;
-  height: 100%;
-  top: 0;
-  margin: 0 auto;
-  background-image: url('../assets/gif-bg1.gif');
+
 }
 
 @media screen and (max-width:780px) {
@@ -140,7 +164,7 @@ export default {
 
 .formContainer .headImg{
   width: 100%;
-  margin-top: 50px;
+  margin-top: 30px;
 }
 
 .formContainer .headImg img{
@@ -149,14 +173,30 @@ export default {
   border-radius: 50%;
 }
 
-.formContainer .loginForm {
-  height: 40vh;
-  border-radius: 15px;
+.dataCon{
+
+  /*background: white;*/
   background-clip: padding-box;
-  box-shadow: 0 0 10px gray;
-  margin:30px auto;
+  margin:10px auto;
   width: 300px;
+  height: 350px;
   padding: 15px 35px 15px 35px;
-  border: 1px solid gray;
 }
+
+.apps{
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+}
+
+.apps .thirdPartyApp{
+  width: 50px;
+  height: 50px;
+}
+
+.apps .thirdPartyApp img{
+  width: 100%;
+  height: 100%;
+}
+
 </style>

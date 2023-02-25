@@ -12,7 +12,7 @@ public enum SearchModuleEnum {
 
     ELASTICSEARCH(1, "ElasticSearch", "使用ElasticSearch进行搜索", "ElasticSearchStrategy"),
 
-    MYSQL_AND_REDIS(2, "Mysql", "使用Mysql模糊查询进行搜索", "MysqlAndRedisStrategy");
+    MYSQL_AND_REDIS(2, "MysqlAndRedis", "使用Mysql模糊查询进行搜索", "MysqlAndRedisStrategy");
 
     /**
      * 状态

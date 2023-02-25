@@ -15,7 +15,7 @@
       </div>
     </div>
     <div>
-      <el-pagination @current-change="handleCurrentChange" :page-size="2" :hide-on-single-page="false" background layout="prev, pager, next" :total="blogList.length"> </el-pagination>
+      <el-pagination @current-change="handleCurrentChange" :page-size="8" :hide-on-single-page="false" background layout="prev, pager, next" :total="blogList.length"> </el-pagination>
     </div>
   </div>
 </template>
@@ -28,15 +28,22 @@ export default {
   name: 'SearchBlogList',
   data() {
     return {
+      type: 1,
       blogList: [],
       searchKeyword: '',
+      sortWay: 1,
     }
   },
   mounted(){
     this.searchKeyword = this.$route.query.keyword
+    this.sortWay = this.$route.query.sortWay
     let that = this
-    searchArticle(this.searchKeyword).then(response=>{
+
+    searchArticle(this.searchKeyword, this.sortWay, this.type).then(response=>{
       that.blogList = response.data.data
+    }).catch(error=>{
+      alert("搜索失败!")
+      console.error(error)
     })
   },
   methods:{

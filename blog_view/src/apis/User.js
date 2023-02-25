@@ -1,7 +1,6 @@
 import request from '@/request'
 
 export function loginToBack(account, password) {
-    alert(account, password)
     const data = {
       account,
       password
@@ -60,5 +59,27 @@ export function logoutFromBack(state){
       'Content-Type': 'application/json'
     },
     data:state,
+  })
+}
+
+export function getUserData(id){
+  return request({
+    url: '/getUserHomeData',
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data:id,
+  })
+}
+
+export function setUserData(userData){
+  return request({
+    url: '/setUserHomeData',
+    method: 'post',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    data:userData,
   })
 }

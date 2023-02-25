@@ -1,0 +1,85 @@
+# Tomcat
+server:
+  tomcat:
+    uri-encoding: UTF-8
+    max-threads: 1000
+    min-spare-threads: 30
+  #端口配置
+  port: 8888
+  #连接超时时间
+spring:
+  application:
+    name: yyd_blog
+  rabbitmq:
+    host: 49.234.51.235
+    port: 5672
+    username: admin
+    password: admin
+    virtual-host: my_vhost
+  elasticsearch:
+    rest:
+      uris: 116.62.242.203:9200
+  servlet:
+    multipart:
+      max-request-size: 100MB #设置总上传数据总大小
+      max-file-size: 20MB #设置单个文件最大长度
+  redis:
+    host: 49.234.51.235
+    port: 6379
+    password: lcy712
+    jedis:
+      pool:
+        ## 连接池最大连接数（使用负值表示没有限制）
+        #spring.redis.pool.max-active=8
+        max-active: 8
+        ## 连接池最大阻塞等待时间（使用负值表示没有限制）
+        #spring.redis.pool.max-wait=-1
+        max-wait: -1
+        ## 连接池中的最大空闲连接
+        #spring.redis.pool.max-idle=8
+        max-idle: 8
+        ## 连接池中的最小空闲连接
+        #spring.redis.pool.min-idle=0
+        min-idle: 0
+      ## 连接超时时间（毫秒）
+    timeout: 1200
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driverClassName: com.mysql.cj.jdbc.Driver
+    druid:
+      url: jdbc:mysql://116.62.242.203/yyd_blog?allowMultiQueries=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=GMT
+      username: root
+      password: lcy712YYD*
+      initial-size: 10
+      max-active: 100
+      min-idle: 10
+      max-wait: 60000
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+  devtools:
+    restart:
+      additional-paths: src/main/resource/static/
+  jwt:
+    ###过期时间 s数432000 5天
+    time: 432000
+    ###安全密钥
+    secret: "BlogSecret"
+    ###token前缀
+    prefix: "Bearer "
+    ###http头key
+    header: "Authorization"
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.yyd.blog_back.entity  #所有entity别名所在包
+
+
+logging:
+  config: classpath:logback-spring.xml
+
+project:
+  file:
+    path: /root/yyd_blog/static/
+  searchMode: "es"

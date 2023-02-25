@@ -1,10 +1,13 @@
 package com.yyd.blog_back.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
-import com.yyd.blog_back.common.util.CreateAccount;
+import com.yyd.blog_back.common.util.CreateAccountUtil;
 import com.yyd.blog_back.config.JwtConfig;
 import com.yyd.blog_back.entity.User;
+import com.yyd.blog_back.entity.UserData;
+import com.yyd.blog_back.mapper.UserDataMapper;
 import com.yyd.blog_back.mapper.UserMapper;
+import com.yyd.blog_back.vo.UserDataVo;
 import com.yyd.blog_back.vo.UserVo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
@@ -21,6 +24,9 @@ public class UserService {
     private UserMapper userMapper;
 
     @Autowired
+    private UserDataMapper userDataMapper;
+
+    @Autowired
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -29,13 +35,13 @@ public class UserService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public List<User> getAllUsersData(){
+    public List<User> getAllUsers(){
         return userMapper.selectList(null);
     }
 
     public List<UserVo> getUserVoList(){
         List<UserVo> userVoList = new ArrayList<>();
-        getAllUsersData().stream().forEach(user -> {
+        getAllUsers().stream().forEach(user -> {
             userVoList.add(new UserVo(user, redisTemplate.opsForValue().get(JwtConfig.REDIS_TOKEN_KEY_PREFIX + user.getAccount()) != null));
 
         });
@@ -53,7 +59,7 @@ public class UserService {
     }
 
     public User register(User newUser){
-        newUser.setAccount(CreateAccount.createAccount());
+        newUser.setAccount(CreateAccountUtil.createAccount());
         newUser.setPassword(bCryptPasswordEncoder.encode(newUser.getPassword()));
         newUser.setStatus(0);
         newUser.setRolesId("2,3");
@@ -78,5 +84,29 @@ public class UserService {
     public QueryWrapper<User> getQueryWrapper(String name, String value){
         QueryWrapper<User> queryWrapper = new QueryWrapper<>();
         return queryWrapper.eq(name, value);
+    }
+
+    public Boolean updateUser(UserDataVo userDataVo){
+        User user = userMapper.selectById(userDataVo.getId());
+        user.setNickname(userDataVo.getNickname());
+        user.setStatus(userDataVo.getStatus());
+        user.setPhoneNumber(userDataVo.getPhoneNumber());
+        user.setEmail(userDataVo.getEmail());
+
+        userMapper.updateById(user);
+
+        UserData userData = userDataMapper.selectById(user.getUserDataId());
+        userData.setAvatar(userDataVo.getAvatar());
+        userData.setDes(userDataVo.getDes());
+        userData.setGender(userDataVo.getGender());
+        userData.setBirthdate(userDataVo.getBirthdate());
+
+        StringBuilder tags = new StringBuilder();
+        for(String tag : userDataVo.getTags()){
+            tags.append(tag).append(",");
+        }
+        userData.setTags(tags.toString());
+        userDataMapper.updateById(userData);
+        return true;
     }
 }

@@ -14,7 +14,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("controlRecord")
+@TableName("control_record")
 public class ControlRecord {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;

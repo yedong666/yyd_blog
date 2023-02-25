@@ -115,6 +115,33 @@ const router = new Router({
           path: 'about',
           component: () => import('../components/About.vue'),
         },
+        {
+          path: 'user',
+          component: () => import('../components/user/UserHome.vue'),
+          redirect: '/home/user/userdata',
+          children:[
+            {
+              path: 'userdata',
+              component: () => import('../components/user/UserData.vue'),
+            },
+            {
+              path: 'user_article',
+              component: () => import('../components/user/UserArticle.vue'),
+            },
+            {
+              path: 'user_followList',
+              component: () => import('../components/user/UserFollowList.vue'),
+            },
+            {
+              path: 'user_message',
+              component: () => import('../components/user/UserMessage.vue'),
+            },
+            {
+              path: 'user_history',
+              component: () => import('../components/user/UserHistory.vue'),
+            },
+          ]
+        },
       ],
       
     },

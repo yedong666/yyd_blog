@@ -8,7 +8,7 @@
     </resultMap>
 
     <select id="getArticlesOrderByHot" parameterType="Integer" resultMap="BaseResultMap">
-        SELECT id, title, (a.numberOfLike*10 + a.numberOfComment*10 + a.numberOfView) as hotValue FROM yyd_blog.article as a order by (a.numberOfLike * 10 + a.numberOfComment * 10 + a.numberOfView) desc limit #{num};
+        SELECT id, title, (a.numberOfLike*10 + a.numberOfComment*10 + a.numberOfView) as hotValue FROM yyd_blog.article as a order by hotValue desc limit #{num};
     </select>
 
 </mapper>

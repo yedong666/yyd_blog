@@ -15,14 +15,13 @@
         <span slot="title">退出&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
       </el-menu-item>
        
-       <el-menu-item index="3"> 
+       <el-menu-item index="3" @click="goHome"> 
             <i class="el-icon-location"></i>
           <span>个人中心</span>
        </el-menu-item>
         
       <el-menu-item index="5" @click="closeMenu">
-        <i class="el-icon-document"></i>
-        <span slot="title">收起菜单</span>
+        <i class="el-icon-arrow-down"></i>
       </el-menu-item>
       
     </el-menu>
@@ -42,6 +41,10 @@ export default {
     methods:{
         closeMenu(){
             this.$emit("closeMenu", false)
+        },
+
+        goHome(){
+          this.$router.push({ path: '/home/user' })
         },
 
         logout(){
@@ -65,10 +68,13 @@ export default {
 <style scoped>
 .UserMenuBarContainer{
   margin-top: 20px;
+  padding: 0;
 }
 .el-menu{
     width:140px;
     margin:auto;
+  border: 2px solid white;
+
 }
 
 

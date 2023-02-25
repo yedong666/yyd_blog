@@ -83,6 +83,7 @@ export default {
         margin:auto;
         background: #b8ddf7;
         overflow: hidden;
+        min-height: 900px;
         /* opacity: 90%; */
     }
 </style>

@@ -92,13 +92,7 @@ export default {
 
     mounted(){
          this.searchKeyword = this.$route.query.keyword
-         this.$router.push({
-            path: this.classifies[this.nowClassifyId].searchUrl,
-            query:{
-              sortWayId:Number( this.nowSortWayId),
-              keyword: this.searchKeyword, 
-            }
-        })
+         this.jump()
     },
 
   methods:{

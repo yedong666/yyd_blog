@@ -11,7 +11,7 @@ import lombok.Data;
  */
 
 @Data
-@TableName("userRole")
+@TableName("user_role")
 public class UserRole {
     @TableId(value = "id", type = IdType.AUTO)
     private Integer id;

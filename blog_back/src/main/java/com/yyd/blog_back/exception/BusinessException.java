@@ -1,7 +1,6 @@
 package com.yyd.blog_back.exception;
 
 
-import com.yyd.blog_back.common.util.Code;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 

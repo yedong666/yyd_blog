@@ -53,6 +53,8 @@ export default {
     return {
       isShow: false,
       keyword: '',
+      searchHistory: [],
+      hotSearchKeyword: [],
     }
   },
   methods: {
